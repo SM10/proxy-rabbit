@@ -96,7 +96,7 @@ last_name
 password
 country_id (foreign key mapped to country table)
 session_id (unique)
-session_expiration
+session_last_act
 
 Message Master table. This table will manage all the tables related to messages:
 id

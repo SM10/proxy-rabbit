@@ -1,70 +1,240 @@
-# Getting Started with Create React App
+# Proxy Rabbit
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Overview
 
-## Available Scripts
+What is your app? Brief description in a couple of sentences.
 
-In the project directory, you can run:
+Proxy Rabbit is a social media website aimed at connecting people around the world. It aims to provide a platform where people can freely ask and offer their local specialties and region-exclusive products to each other.
 
-### `npm start`
+### Problem
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+Did you know that Coffee Crisp is only available in Canada? Despite being an amazing commercial success and a widely popular, it isn't sold overseas or even in America.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+There are tons of products like these. Region-exclusive specialties that are unknown to the world. Proxy Rabbit provides a platform for people to learn about and buy these products from and for each other.
 
-### `npm test`
+### User Profile
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Proxy Rabbit is planned to be aimed at young adults, and while a mobile version will be available, it will focus primarily on a tablet and desktop experience.
 
-### `npm run build`
+### Features
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+List the functionality that your app will include. These can be written as user stories or descriptions with related details. Do not describe _how_ these features are implemented, only _what_ needs to be implemented.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Proxy Rabbit will provide 2 ways to search for a proxy, or another user from that region who will help purchase and mail a desired product. The first is by country, and the second will be by popular products.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Once the user has found a proxy, they can send them a message through Proxy Rabbit's built-in messenging system.
 
-### `npm run eject`
+## Implementation
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+### Tech Stack
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+List technologies that will be used in your app, including any libraries to save time or provide more functionality. Be sure to research any potential limitations.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+Front End:
+React
+SASS
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+Back End:
+Node.js
+Express
+MySQL
+Knex
+Nodemon
+Socket.IO
+Passport.js
 
-## Learn More
+### APIs
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+No external APIs will be used for this app.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+### Sitemap
 
-### Code Splitting
+The following pages will be necessary:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+"Find a proxy by country"
+"Find a proxy by product"
+"Mailbox"
 
-### Analyzing the Bundle Size
+The home page will be "Find a proxy by country". This will be a single page application. There is a navigation bar that allows the user to switch between any of the 3 pages on demand.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+### Mockups
 
-### Making a Progressive Web App
+Provide visuals of your app's screens. You can use tools like Figma or pictures of hand-drawn sketches.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+Find a proxy by country:
+![Find a proxy by country image](./src/assets/images/proxy-rabbit-home-page.jpg)
 
-### Advanced Configuration
+Find a proxy by product:
+![Find a proxy by product image](./src/assets/images/proxy-rabbit-by-product.jpg)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+Login page:
+![Login image](./src/assets/images/proxy-rabbit-login.jpg)
 
-### Deployment
+Mailbox page:
+![Mailbox](./src/assets/images/proxy-rabbit-mailbox.jpg)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+### Data
 
-### `npm run build` fails to minify
+Describe your data and the relationships between them. You can show this visually using diagrams, or write it out.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+The following tables will be implemented
+
+Country table with the following columns:
+id
+name
+
+Products table:
+id
+name
+countryId (foreign key mapped to country table)
+
+User table:
+id
+email
+first_name
+last_name
+password
+country_id (foreign key mapped to country table)
+session_id (unique)
+session_expiration
+
+Message Master table. This table will manage all the tables related to messages:
+id
+table_name
+user_one (foreign key mapped to user table)
+user_two (foreign key mapped to user table)
+
+Message Table Sample. A new table will be generated each time a user messages someone they have not messaged before.
+id
+user_one (foreign key mapped to user table)
+user_two (foreign key mapped to user table)
+message
+timestamp
+
+### Endpoints
+
+List endpoints that your server will implement, including HTTP methods, parameters, and example responses. URLs are subject to change.
+
+This app is meant to be used in tandem with the following project:
+
+https://github.com/SM10/proxy-rabbit-api
+
+Api endpoints and their description:
+
+GET http://localhost:8080/api/login/:email/:password
+
+returns the following if email and password are correct:
+
+[{
+    email: email,
+    first_name: first_name,
+    last_name: last_name,
+    country: country_name,
+    user_id: user_id,
+    session_id: session_id
+}]
+
+POST http://localhost:8080/api/register
+
+Verifies that the current email doesn't exist and creates a new one if it doesn't. Returns a 409 error code upon failure. Requires the following body. Returns a 201 response code only.
+
+{
+    email: email
+    password: password
+    first_name: first_name
+    last_name: last_name
+    country_id: country_id
+}
+
+GET http://localhost:8080/api/countries
+
+Returns a list of countries and their ids.
+
+[{
+    id: country_id,
+    name: country_name
+}]
+
+GET http://localhost:8080/api/countries/:countryId/products
+
+Returns a list of all products with a country id that matches the country id.
+
+[{
+    id: product_id,
+    name: name,
+    country: country_id,
+    country_name: country_name
+}]
+
+GET http://localhost:8080/api/products
+
+Returns a list of all products and their ids.
+
+{
+    id: product_id,
+    name: name,
+    country: country_id,
+    country_name: country_name
+}
+
+GET http://localhost:8080/api/message
+
+Returns a list of all conversations that the user is a part of:
+
+[{
+    id: table_name,
+    recipient_id: recipient's id,
+    recipient_first_name: recipient's first name,
+    recipient_last_name: recipient's last name
+}]
+
+GET http://localhost:8080/api/message/:id/:recipient_id
+
+Returns all messages between the user and recipient, sorted by timestamp from earliest to latest:
+
+[{
+    id: table_name,
+    recipient_id: recipient's id,
+    timestamp: timestamp of the message
+}]
+
+POST http://localhost:8080/api/message
+
+Sends a user's message to the server to be sent to the recipient. The body of the data sent to the server will be expecting the following format:
+
+{
+    recipient_id: recipient's id,
+    user_id: user's id,
+    message: user's message for the recipient
+}
+
+The following will be returned upon a successful post:
+
+{
+    message_table_name: message table's name,
+    recipient_id: recipient's id,
+    user_id: user's id,
+    timestamp: timestamp of the message
+    message: user's message for the recipient
+}
+
+### Auth
+
+Authentication and authorization will be implemented through Passport.js's, authentication methods. The minimum necessary will be an Email and Password. If there is time, authentication through Google Account, Facebook Account and/or Apple Account will be implemented.
+
+## Roadmap
+
+Scope your project as a sprint. Break down the tasks that will need to be completed and map out timeframes for implementation. Think about what you can reasonably complete before the due date. The more detail you provide, the easier it will be to build.
+
+January 19 - 22: Complete development and testing api requests.
+January 22 - 25: Complete development of components and styling of front end.
+January 26 - 30: Implementation of real-time messaging through Server.IO
+January 31 - Feb 3: Implementation of Nice-to-haves
+
+## Nice-to-haves
+
+Your project will be marked based on what you committed to in the above document. Under nice-to-haves, you can list any additional features you may complete if you have extra time, or after finishing.
+
+1. A rating system where users can rate each other as proxies.
+2. Form for user to submit new region-exclusive products.
+3. Expected price of products.

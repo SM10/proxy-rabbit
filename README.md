@@ -86,6 +86,7 @@ name
 Products table:
 id
 name
+image_url
 countryId (foreign key mapped to country table)
 
 User table:

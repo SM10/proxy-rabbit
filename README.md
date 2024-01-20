@@ -107,8 +107,8 @@ user_two (foreign key mapped to user table)
 
 Message Table Sample. A new table will be generated each time a user messages someone they have not messaged before.
 id
-user_one (foreign key mapped to user table)
-user_two (foreign key mapped to user table)
+from (foreign key mapped to user.id on user table)
+two (foreign key mapped to user.id on user table)
 message
 timestamp
 

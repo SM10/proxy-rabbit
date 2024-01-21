@@ -87,7 +87,7 @@ Products table:
 id
 name
 image_url
-countryId (foreign key mapped to country table)
+country_id (foreign key mapped to country table)
 
 User table:
 id
@@ -96,8 +96,6 @@ first_name
 last_name
 password
 country_id (foreign key mapped to country table)
-session_id (unique)
-session_last_act
 
 Message Master table. This table will manage all the tables related to messages:
 room_id (primary key)
@@ -112,6 +110,8 @@ to (foreign key mapped to user.id on user table)
 message
 timestamp
 
+Sessions. A sessions table as required by connect-session-knex dependency
+
 ### Endpoints
 
 List endpoints that your server will implement, including HTTP methods, parameters, and example responses. URLs are subject to change.
@@ -122,18 +122,28 @@ https://github.com/SM10/proxy-rabbit-api
 
 Api endpoints and their description:
 
-GET http://localhost:8080/api/login/:email/:password
+POST http://localhost:8080/api/login/
+
+Requires the following body:
+
+{
+    email: email,
+    password: password
+}
 
 returns the following if email and password are correct:
 
-[{
+{
     email: email,
     first_name: first_name,
     last_name: last_name,
     country: country_name,
-    user_id: user_id,
-    session_id: session_id
-}]
+    user_id: user_id
+}
+
+POST htpp://localhost:8080/api/logout
+
+Logs the user out. No body required.
 
 POST http://localhost:8080/api/register
 
@@ -160,12 +170,12 @@ GET http://localhost:8080/api/countries/:countryId/products
 
 Returns a list of all products with a country id that matches the country id.
 
-[{
+{
     id: product_id,
     name: name,
     country: country_id,
     country_name: country_name
-}]
+}
 
 GET http://localhost:8080/api/products
 

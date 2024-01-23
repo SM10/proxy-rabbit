@@ -1,3 +1,43 @@
 @use './fonts' as *;
 
-$color-
+$color-light-gray: #e8e6e6;
+$color-black: #000000;
+$color-white: #FFFFFF;
+$color-light-red: #de655b;
+$color-bold-red: #ff1300;
+
+@mixin tablet{
+    @media (min-width: 768px) {
+        @content
+    }
+};
+
+@mixin desktop{
+    @media (min-width: 1280px){
+        @content
+    }
+};
+
+@mixin page-boundaries{
+    padding: 0 1rem 0;
+    
+    @include tablet{
+        padding: 0 2rem 0;
+    }
+
+    @include desktop{
+        padding: 0 2rem 0;
+    }
+};
+
+*{
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+    font-family: 'Titillium Web'
+};
+
+html, body{
+    min-width: 100%;
+    min-height: 100%;
+}

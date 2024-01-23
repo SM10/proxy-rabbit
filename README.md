@@ -2,7 +2,9 @@
 
 ## Overview
 
-This project is meant to be used with the following server: https://github.com/SM10/proxy-rabbit-api.
+Two repos are required for this project:
+https://github.com/SM10/proxy-rabbit
+https://github.com/SM10/proxy-rabbit-api
 
 Proxy Rabbit is a social media website aimed at connecting people around the world. It aims to provide a platform where people can freely ask and offer their local specialties and region-exclusive products to each other.
 
@@ -68,8 +70,6 @@ Mailbox page:
 ![Mailbox](./src/assets/images/proxy-rabbit-mailbox.jpg)
 
 ### Data
-
-Describe your data and the relationships between them. You can show this visually using diagrams, or write it out.
 
 The following tables will be implemented
 

@@ -4,4 +4,4 @@ function ChatList(){
     return(<></>)
 }
 
-module.exports = ChatList;
+export default ChatList;

@@ -4,4 +4,4 @@ function Logout(){
     return (<></>)
 }
 
-module.exports = Logout;
+export default Logout;

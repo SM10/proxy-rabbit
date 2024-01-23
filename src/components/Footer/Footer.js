@@ -4,4 +4,4 @@ function Footer(){
     return (<></>)
 }
 
-module.exports = Footer;
+export default Footer;

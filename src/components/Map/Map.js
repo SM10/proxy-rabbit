@@ -4,4 +4,4 @@ function Map(){
     return (<></>)
 }
 
-module.exports = Map;
+export default Map;

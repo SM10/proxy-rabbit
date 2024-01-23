@@ -26,9 +26,21 @@ $color-bold-red: #ff1300;
     }
 
     @include desktop{
-        padding: 0 2rem 0;
+        padding: 0 6% 0;
     }
 };
+
+@mixin page-header-text{
+
+}
+
+@mixin subheader-text{
+    font-size: 0.7rem;
+
+    @include tablet{
+        font-size: 1rem;
+    }
+}
 
 *{
     box-sizing: border-box;

@@ -10,19 +10,19 @@ function Header({isLoggedIn, userProfile}){
         contentObjects = (<div className="header-content">
             <Link to='/Mailbox'><img src={mailIcon} alt="Mail button" className="header-content__mail"/></Link>
             <h4 className="header-content__greeting">Hello, {userProfile.first_name}</h4>
-            <Link to='/Logout'><h4 className="header-content__logout">Logout</h4></Link>
+            <Link to='/Logout'><h4 className="header-content__text--clickable">Logout</h4></Link>
         </div>)
     }else{
-        contentObjects = (<div>
-            <Link to='/SignIn'><h4 className="header-content__signin">Sign in</h4> </Link>
-            <Link to='/Register'><h4 className="header-content__register">Register</h4></Link>
+        contentObjects = (<div className="header-content">
+            <Link to='/SignIn'><h4 className="header-content__text--clickable">Sign in</h4> </Link>
+            <Link to='/Register'><h4 className="header-content__text--clickable">Register</h4></Link>
         </div>)
     }
     
     return (<header className="header">
-        <img src={logo} alt="Proxy Rabbit company logo" />
+        <img src={logo} alt="Proxy Rabbit company logo" className="header__logo"/>
         {contentObjects}
     </header>)
 }
 
-module.exports = Header;
+export default Header;

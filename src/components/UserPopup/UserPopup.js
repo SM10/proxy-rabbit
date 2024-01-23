@@ -4,4 +4,4 @@ function UserPopup(){
     return (<></>)
 }
 
-return UserPopup;
+export default UserPopup;

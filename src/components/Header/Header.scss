@@ -1,0 +1,42 @@
+@use '../../styles/partials/global' as *;
+
+.header{
+    width: 100%;
+    @include page-boundaries;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 1rem;
+    padding-bottom: 0.75rem;
+
+    @include tablet{
+        padding-top: 1.5rem;
+        padding-bottom: 1.5rem;
+    }
+
+    &__logo{
+        max-width: 35%;
+
+        @include tablet{
+            width: 20%;
+        }
+    }
+
+    &-content{
+        display:flex;
+        flex-grow: 1;
+        justify-content: flex-end;
+        gap: 1rem;
+        @include subheader-text;
+
+        @include tablet{
+            gap: 5%;
+        }
+
+        &__text--clickable{
+            &:hover{
+                text-decoration: underline;
+            }
+        }
+    }
+}

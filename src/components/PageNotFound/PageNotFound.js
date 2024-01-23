@@ -1,7 +1,7 @@
-import 'PageNotFound.scss';
+import './PageNotFound.scss';
 
 function PageNotFound(){
     return(<></>)
 }
 
-return PageNotFound;
+export default PageNotFound;

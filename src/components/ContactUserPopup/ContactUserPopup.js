@@ -4,4 +4,4 @@ function ContactUserPopup(){
     return (<></>)
 }
 
-module.exports = ContactUserPopup;
+export default ContactUserPopup;

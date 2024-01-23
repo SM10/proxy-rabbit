@@ -21,7 +21,7 @@ function App() {
 
   return (
     <BrowserRouter>
-      <Header />
+      <Header isLoggedIn={isLoggedIn} userProfile={userProfile}/>
       {showUserPopup ? <UserPopup /> : ''}
       {showContactUserPopup ? <ContactUserPopup /> : ''}
       <Routes >

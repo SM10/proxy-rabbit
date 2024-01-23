@@ -4,4 +4,4 @@ function FindByLocation(){
     return (<></>)
 }
 
-module.exports = FindByLocation;
+export default FindByLocation;

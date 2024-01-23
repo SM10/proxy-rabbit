@@ -193,40 +193,50 @@ GET http://localhost:8080/api/message
 Returns a list of all conversations that the user is a part of:
 
 [{
-    id: table_name,
+    room_id: room id,
     recipient_id: recipient's id,
     recipient_first_name: recipient's first name,
     recipient_last_name: recipient's last name
 }]
 
-GET http://localhost:8080/api/message/:id/:recipient_id
+GET http://localhost:8080/api/message/:roomId
 
 Returns all messages between the user and recipient, sorted by timestamp from earliest to latest:
 
 [{
-    id: table_name,
-    recipient_id: recipient's id,
+    room_id: room_id,
+    from_id: sender's id,
+    from_first_name: sender's_first_name
+    from_last_name: sender's last name
+    to_id: recipient's id,
+    to_first_name: recipient's first name
+    to_last_name: recipient's last name
+    message: contents of the message
     timestamp: timestamp of the message
 }]
 
 POST http://localhost:8080/api/message
 
-Sends a user's message to the server to be sent to the recipient. The body of the data sent to the server will be expecting the following format:
+Sends a user's message to the server to be sent to the recipient. The body of the data sent to the server will be expecting the following format. If room_id is null, a room will be found and/or created:
 
 {
-    recipient_id: recipient's id,
-    user_id: user's id,
+    room_id: room id,
+    recipient_id: recipient's user id,
     message: user's message for the recipient
 }
 
 The following will be returned upon a successful post:
 
 {
-    message_table_name: message table's name,
-    recipient_id: recipient's id,
-    user_id: user's id,
+    room_id: room_id,
+    from_id: sender's id,
+    from_first_name: sender's_first_name
+    from_last_name: sender's last name
+    to_id: recipient's id,
+    to_first_name: recipient's first name
+    to_last_name: recipient's last name
+    message: contents of the message
     timestamp: timestamp of the message
-    message: user's message for the recipient
 }
 
 ### Auth

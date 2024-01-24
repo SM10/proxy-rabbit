@@ -38,6 +38,11 @@
             justify-content: center;
         }
 
+        @include desktop{
+            max-width: 60rem;
+            align-self: flex-start;
+        }
+
         &-about{
             display:flex;
             flex-direction: column;
@@ -50,6 +55,9 @@
             &__subheader{
                 @include subheader-text;
                 margin-bottom: 0.25rem;
+                @include tablet{
+                    margin-bottom:0.5rem;
+                }
             }
 
             &__text{
@@ -70,6 +78,9 @@
             &__subheader{
                 @include subheader-text;
                 margin-bottom: 0.25rem;
+                @include tablet{
+                    margin-bottom:0.5rem;
+                }
             }
 
             &__text{

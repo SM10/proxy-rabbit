@@ -4,4 +4,4 @@ function FindByProduct(){
     return (<></>)
 }
 
-module.exports = FindByProduct;
+export default FindByProduct;

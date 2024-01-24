@@ -4,4 +4,4 @@ function Chatbox(){
     return(<></>)
 }
 
-module.exports = Chatbox
+export default Chatbox

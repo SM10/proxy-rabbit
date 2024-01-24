@@ -16,10 +16,12 @@ import { useState, useEffect } from 'react';
 function App() {
   const [showUserPopup, setShowUserPopup] = useState(false);
   const [showContactUserPopup, setShowContactUserPopup] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [userProfile, setUserProfile] = useState(null);
 
   return (
     <BrowserRouter>
-      <Header />
+      <Header isLoggedIn={isLoggedIn} userProfile={userProfile}/>
       {showUserPopup ? <UserPopup /> : ''}
       {showContactUserPopup ? <ContactUserPopup /> : ''}
       <Routes >

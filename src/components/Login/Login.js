@@ -4,4 +4,4 @@ function Login(){
     return (<></>)
 }
 
-module.exports = Login;
+export default Login;

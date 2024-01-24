@@ -4,4 +4,4 @@ function ProductListing(){
     return (<></>)
 }
 
-module.exports = ProductListing;
+export default ProductListing;

@@ -4,4 +4,4 @@ function Register(){
     return (<></>)
 }
 
-module.exports = Register;
+export default Register;

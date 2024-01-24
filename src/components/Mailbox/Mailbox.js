@@ -4,4 +4,4 @@ function Mailbox(){
     return (<></>)
 }
 
-module.exports = Mailbox;
+export default Mailbox;

@@ -12,4 +12,10 @@ body, html{
     min-height: 100%;
     position: relative;
     background-color: $color-light-gray;
+    display: flex;
+    flex-direction: column;
+}
+
+.main{
+    flex-grow:1;
 }

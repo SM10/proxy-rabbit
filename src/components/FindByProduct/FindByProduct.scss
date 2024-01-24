@@ -1,5 +1,6 @@
 @use '../../styles/partials/global' as *;
 
+
 .findbyproduct{
     width: 100%;
     display:flex;
@@ -37,7 +38,12 @@
 
             &-search{
                 @include search-parent;
-                flex-grow:1
+                flex-grow:1;
+
+                @include tablet{
+                    flex-grow: 0;
+                    width: 40%;
+                }
             }
 
             &-content{
@@ -47,6 +53,26 @@
                 align-items: center;
                 gap: 1rem;
                 width: 100%;
+            }
+        }
+
+        &-body{
+            @include page-boundaries;
+            padding-top: 0.5rem;
+            padding-bottom: 0.5rem;
+
+            @include tablet{
+                padding-top: 1rem;
+                padding-bottom: 1rem;
+            }
+
+            &-slide{
+                &-batch{
+                    display:flex;
+                    justify-content: center;
+                    align-items: center;
+                    gap: 1rem;
+                }
             }
         }
     }

@@ -31,6 +31,8 @@ Once the user has found a proxy, they can send them a message through Proxy Rabb
 Front End:
 React
 SASS
+Socket.IO
+Axios
 
 Back End:
 Node.js
@@ -43,7 +45,7 @@ Passport.js
 
 ### APIs
 
-No external APIs will be used for this app.
+A RESTFUL API will be used for this. The API can be found here:
 
 ### Sitemap
 
@@ -233,7 +235,9 @@ The following will be returned upon a successful post:
 
 ### Auth
 
-Authentication and authorization will be implemented through Passport.js's, authentication methods. The minimum necessary will be an Email and Password. If there is time, authentication through Google Account, Facebook Account and/or Apple Account will be implemented.
+Current supported authentication method is through web token.
+
+Authentication and authorization will be implemented through Passport.js's authentication methods. The minimum necessary will be an Email and Password. If there is time, authentication through OAuth using Google Account, Facebook Account and/or Apple Account will be implemented.
 
 ## Roadmap
 

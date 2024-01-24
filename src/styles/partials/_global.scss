@@ -55,6 +55,24 @@ $color-bold-red: #ff1300;
     }
 }
 
+@mixin line($side){
+    position: absolute;
+        #{$side}: 0.1rem;
+        border-top: 0.075rem solid $color-white;
+        width: 100%;
+
+        @include tablet{
+            border-top-width: 2%;
+        }
+}
+
+@mixin search-parent{
+    display: flex;
+            flex-direction: row;
+            border-radius: 0.3rem;
+            position: relative;
+}
+
 *{
     box-sizing: border-box;
     padding: 0;
@@ -69,4 +87,35 @@ input:active{
 a{
     text-decoration: none;
     color: inherit;
+}
+
+input{
+    flex-grow: 1;
+                border:none;
+                padding: 0.45rem 0.75rem 0.45rem;
+                border-radius: 0.3rem;
+                @include body-text;
+                width: 100%;
+}
+
+button{
+    position: absolute;
+                right: 0;
+                top: 0;
+                bottom: 0;
+                border:none;
+                padding-left: 0.75rem;
+                padding-right: 0.75rem;
+                background-color: $color-light-red;
+                color: $color-white;
+                border-radius: 0.3rem;
+                @include body-text;
+
+                &:active{
+                    background-color: $color-bold-red;
+                }
+}
+
+.react-slideshow-container > .nav{
+    top: 45%;
 }

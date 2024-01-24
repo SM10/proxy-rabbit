@@ -45,7 +45,7 @@ Passport.js
 
 ### APIs
 
-A RESTFUL API will be used for this. The API can be found here:
+A RESTFUL API will be used for this. The API can be found here: https://github.com/SM10/proxy-rabbit-api
 
 ### Sitemap
 

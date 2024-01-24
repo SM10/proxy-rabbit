@@ -1,7 +1,7 @@
 import "./FindByLocation.scss"
 
 function FindByLocation(){
-    return (<></>)
+    return (<main className="findbylocation"></main>)
 }
 
 export default FindByLocation;

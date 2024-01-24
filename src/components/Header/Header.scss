@@ -33,7 +33,7 @@
         flex-grow: 1;
         justify-content: flex-end;
         gap: 1rem;
-        @include subheader-text;
+        @include body-text;
 
         @include tablet{
             gap: 5%;
@@ -78,7 +78,7 @@
         }
 
         &__item{
-            @include subheader-text;
+            @include body-text;
             padding: 0.25rem 1rem 0.25rem;
 
             @include tablet{

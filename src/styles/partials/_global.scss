@@ -35,6 +35,14 @@ $color-bold-red: #ff1300;
 }
 
 @mixin subheader-text{
+    font-size: 1rem;
+
+    @include tablet{
+        font-size: 1.5rem;
+    }
+}
+
+@mixin body-text{
     font-size: 0.7rem;
 
     @include tablet{
@@ -48,11 +56,6 @@ $color-bold-red: #ff1300;
     margin: 0;
     font-family: 'Titillium Web'
 };
-
-html, body{
-    min-width: 100%;
-    min-height: 100%;
-}
 
 a{
     text-decoration: none;

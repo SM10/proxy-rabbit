@@ -19,9 +19,21 @@ function Header({isLoggedIn, userProfile}){
         </div>)
     }
     
-    return (<header className="header">
-        <img src={logo} alt="Proxy Rabbit company logo" className="header__logo"/>
-        {contentObjects}
+    return (<header className="top">
+        <div className="header">
+            <img src={logo} alt="Proxy Rabbit company logo" className="header__logo"/>
+            {contentObjects}
+        </div>
+        <nav className="nav-bar">
+            <hr className="nav-bar__line"/>
+            <div className="nav-bar-links">
+                <Link to='/FindByLocation'><h4 className="nav-bar-links__item">By Location</h4></Link>
+                <Link to='/FindByProduct'><h4 className="nav-bar-links__item">By Product</h4></Link>
+                <Link to='/Mailbox'><h4 className="nav-bar-links__item">Your Mail</h4></Link>
+            </div>
+            <hr className="nav-bar__line"/>
+        </nav>
+        
     </header>)
 }
 

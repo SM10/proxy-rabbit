@@ -1,0 +1,12 @@
+@use '../../styles/partials/global' as *;
+
+.map{
+    width: 100%;
+    height: 100%;
+    &__country{
+        
+        &:hover{
+            fill: $color-bold-red;
+        }
+    }
+}

@@ -19,6 +19,8 @@ function App() {
   const [showContactUserPopup, setShowContactUserPopup] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [userProfile, setUserProfile] = useState(null);
+  
+
   return (
     <BrowserRouter>
       <Header isLoggedIn={isLoggedIn} userProfile={userProfile}/>

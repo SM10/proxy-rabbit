@@ -14,7 +14,7 @@ function Header({isLoggedIn, userProfile}){
         </div>)
     }else{
         contentObjects = (<div className="header-content">
-            <Link to='/SignIn'><h4 className="header-content__text--clickable">Sign in</h4> </Link>
+            <Link to='/LogIn'><h4 className="header-content__text--clickable">Sign in</h4> </Link>
             <Link to='/Register'><h4 className="header-content__text--clickable">Register</h4></Link>
         </div>)
     }

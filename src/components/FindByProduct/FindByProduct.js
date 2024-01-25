@@ -22,7 +22,7 @@ function FindByProduct(){
             <div className="findbyproduct-find-head">
                 <hr className="findbyproduct-find-head__line--top" />
                 <div className="findbyproduct-find-head-content">
-                    <h1 className="findbyproduct-find-head__title">Find a Product</h1>
+                    <h1 className="findbyproduct-find-head__title">Find a Specialty</h1>
                     <form className="findbyproduct-find-head-search" onSubmit={onSubmit}>
                         <input className="findbyproduct-find-head-search__input" name="search" placeholder="Search" onChange={onSearchChange} value={searchInput}></input>
                         <button className="findbyproduct-find-head-search__button" type="submit" >Go!</button>
@@ -56,7 +56,7 @@ function FindByProduct(){
             <div className="findbyproduct-discovery-head">
                 <hr className="findbyproduct-discovery-head__line--top" />
                 <div className="findbyproduct-discovery-head-content">
-                    <h2 className="findbyproduct-discovery-head__title">Discover These Products</h2>
+                    <h2 className="findbyproduct-discovery-head__title">Discover These Specialties</h2>
                 </div>
                 <hr className="findbyproduct-discovery-head__line--bottom" />
             </div>

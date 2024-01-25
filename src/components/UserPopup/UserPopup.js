@@ -3,7 +3,7 @@ import UserCard from '../UserCard/UserCard';
 import closeIcon from '../../assets/icons/close_FILL0_wght400_GRAD0_opsz24.svg'
 import {useState} from 'react'
 
-function UserPopup({users}){
+function UserPopup({users, onCloseClicked}){
 
     const [searchInput, setSearchInput] = useState('')
 
@@ -17,7 +17,7 @@ function UserPopup({users}){
 
     return (<div className='popup-background'>
         <section className='user-popup'>
-            <button className='user-popup__exit'><img src={closeIcon} alt='close button icon' className='user-popup__exit__icon' /></button>
+            <button className='user-popup__exit' onClick={()=>{onCloseClicked()}}><img src={closeIcon} alt='close button icon' className='user-popup__exit__icon' /></button>
             <div className="user-popup-head">
                 <h1 className="user-popup-head__title">Find a Proxy</h1>
                 <form className="user-popup-head-search">

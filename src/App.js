@@ -50,12 +50,11 @@ function App() {
         console.log(error)
       }
   }
-  
 
   return (
     <BrowserRouter>
       <Header isLoggedIn={isLoggedIn} userProfile={userProfile}/>
-      {showUserPopup ? <UserPopup users={users}/> : ''}
+      {showUserPopup ? <UserPopup users={users} onCloseClicked={() => {setShowUserPopup(false);}}/> : ''}
       {showContactUserPopup ? <ContactUserPopup /> : ''}
       <Routes >
         <Route path='/' element={<FindByLocation supportedCountries={countries} onCountryClicked={onCountryClicked}/>} />

@@ -171,6 +171,17 @@ Returns a list of all products with a country id that matches the country id.
     country_name: country_name
 }
 
+GET http://localhost:8080/api/countries/:countryId/users
+
+Returns a list of all users with a country id that matches the parameter country id.
+
+{
+    first_name: first_name
+    last_name: last_name
+    country_id: country_id
+    country_name: country name
+}
+
 GET http://localhost:8080/api/products
 
 Returns a list of all products and their ids.

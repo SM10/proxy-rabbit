@@ -45,11 +45,22 @@
                 flex-direction: column;
                 align-items: flex-start;
                 @include body-text;
+                width: 70%;
 
 
-                &-email, &-password{
+                &-email, &-password, &-first-name, &-last-name, &-password{
+                    display: flex;
+                    flex-direction: column;
+                    flex-grow:1;
+                    width: 100%;
+                    
                     &__label{
                         padding-bottom: 0.25rem;
+                    }
+
+                    &__input{
+                        @include input;
+                        
                     }
 
                     &__error{

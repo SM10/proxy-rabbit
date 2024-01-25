@@ -3,7 +3,7 @@ import {useState, useEffect} from 'react';
 
 function Login(){
 
-    const [isInputValid, setIsInputValid] = useState(false);
+    const [isInputValid, setIsInputValid] = useState(true);
     
     function onInputChanged(){
         if(!isInputValid) setIsInputValid(true)
@@ -32,7 +32,7 @@ function Login(){
                     <input name="email" type="text" id="login-email" className="login-container-form-email__input" onChange={()=>{onInputChanged()}}/>
                     <p className={`login-container-form-email__error${isInputValid ? '' : '--active'}`}>Please enter a valid email</p>
                 </label>
-                <label htmlFor="login-password">
+                <label htmlFor="login-password" className="login-container-form-password">
                 <p className="login-container-form-password__label">Password</p>
                     <input name="password" type="password" id="login-password" className="login-container-form-password__input"/>
                     <div className="login-container-form-password__holder"></div>

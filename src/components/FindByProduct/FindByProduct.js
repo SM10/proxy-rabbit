@@ -25,7 +25,7 @@ function FindByProduct(){
                     <h1 className="findbyproduct-find-head__title">Find a Product</h1>
                     <form className="findbyproduct-find-head-search" onSubmit={onSubmit}>
                         <input className="findbyproduct-find-head-search__input" name="search" placeholder="Search" onChange={onSearchChange} value={searchInput}></input>
-                        <button className="findbylocation-find-head-search__button" type="submit" >Go!</button>
+                        <button className="findbyproduct-find-head-search__button" type="submit" >Go!</button>
                     </form>
                 </div>
                 <hr className="findbyproduct-find-head__line--bottom" />

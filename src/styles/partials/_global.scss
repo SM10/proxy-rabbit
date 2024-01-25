@@ -55,6 +55,14 @@ $color-bold-red: #ff1300;
     }
 }
 
+@mixin tiny-text{
+    font-size: 0.5rem;
+
+    @include tablet{
+        font-size: 0.5rem;
+    }
+}
+
 @mixin line($side){
     position: absolute;
         #{$side}: 0.1rem;
@@ -89,7 +97,7 @@ a{
     color: inherit;
 }
 
-input{
+@mixin input(){
     flex-grow: 1;
                 border:none;
                 padding: 0.45rem 0.75rem 0.45rem;
@@ -98,7 +106,7 @@ input{
                 width: 100%;
 }
 
-button{
+@mixin search-button(){
     position: absolute;
                 right: 0;
                 top: 0;

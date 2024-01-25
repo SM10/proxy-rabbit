@@ -21,6 +21,7 @@ function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [userProfile, setUserProfile] = useState(null);
   const [countries, setCountries] = useState([]);
+  const [users, setUsers] = useState([])
 
   useEffect(()=>{
     (async ()=>{
@@ -33,14 +34,32 @@ function App() {
     })()
   }, [])
 
+  useEffect(()=>{
+      if(users && users.length > 0){
+        setShowUserPopup(true);
+      }
+  }, [users])
+
+  const onCountryClicked = async (countryObject) =>{
+      try{
+        console.log(`${process.env.REACT_APP_BASE_URL}/api/countries/${countryObject.id}/users`)
+        const response = await axios.get(`${process.env.REACT_APP_BASE_URL}/api/countries/${countryObject.id}/users`)
+        console.log(response.data);
+        setUsers(response.data);
+      }catch(error){
+        console.log(error)
+      }
+  }
+  
+
   return (
     <BrowserRouter>
       <Header isLoggedIn={isLoggedIn} userProfile={userProfile}/>
-      {showUserPopup ? <UserPopup /> : ''}
+      {showUserPopup ? <UserPopup users={users}/> : ''}
       {showContactUserPopup ? <ContactUserPopup /> : ''}
       <Routes >
-        <Route path='/' element={<FindByLocation supportedCountries={countries}/>} />
-        <Route path='/FindByLocation' element={<FindByLocation supportedCountries={countries}/>} />
+        <Route path='/' element={<FindByLocation supportedCountries={countries} onCountryClicked={onCountryClicked}/>} />
+        <Route path='/FindByLocation' element={<FindByLocation supportedCountries={countries} onCountryClicked={onCountryClicked}/>} />
         <Route path='/FindByProduct' element={<FindByProduct />} />
         <Route path='/Login' element={<Login />} />
         <Route path='/Logout' element={<Logout />} />

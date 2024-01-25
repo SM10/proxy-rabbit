@@ -2,7 +2,7 @@ import "./FindByLocation.scss"
 import Map from '../Map/Map'
 import { useState } from "react"
 
-function FindByLocation({supportedCountries, onSearchClicked}){
+function FindByLocation({supportedCountries, onCountryClicked, onSearchClicked}){
 
     const [searchInput, setSearchInput] = useState('')
 
@@ -24,7 +24,7 @@ function FindByLocation({supportedCountries, onSearchClicked}){
                 <button className="findbylocation-head-search__button" type="submit" >Go!</button>
             </form>
         </div>
-        <Map supportedCountries={supportedCountries}/>
+        <Map supportedCountries={supportedCountries} onCountryClicked={onCountryClicked}/>
     </main>)
 }
 

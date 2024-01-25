@@ -1,23 +1,32 @@
 import './UserPopup.scss';
 import UserCard from '../UserCard/UserCard';
+import closeIcon from '../../assets/icons/close_FILL0_wght400_GRAD0_opsz24.svg'
 import {useState} from 'react'
 
-function UserPopup(users){
+function UserPopup({users}){
 
     const [searchInput, setSearchInput] = useState('')
 
+    if(!users || !users.map){
+        return(<div className='popup-background'>
+        <section className='user-popup'>
+            <h2>Loading</h2>
+        </section>
+    </div>)
+    }
+
     return (<div className='popup-background'>
         <section className='user-popup'>
+            <button className='user-popup__exit'><img src={closeIcon} alt='close button icon' className='user-popup__exit__icon' /></button>
             <div className="user-popup-head">
                 <h1 className="user-popup-head__title">Find a Proxy</h1>
                 <form className="user-popup-head-search">
                     <input className="user-popup-head-search__input" name="search" placeholder="Search" onChange={(e)=>{setSearchInput(e.target.value)}} value={searchInput}></input>
-                    <button className="user-popup-head-search__button" type="submit" >Go!</button>
                 </form>
             </div>
             <div className="user-popup-cards">
                 {users.map(user => {
-                    <UserCard user={user} country={user.country_name}/>
+                    return(<UserCard user={user} country={user.country_name}/>)
                 })}
             </div>
         </section>

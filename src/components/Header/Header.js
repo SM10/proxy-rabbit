@@ -28,7 +28,7 @@ function Header({isLoggedIn, userProfile}){
             <hr className="nav-bar__line"/>
             <div className="nav-bar-links">
                 <Link to='/FindByLocation'><h4 className="nav-bar-links__item">By Location</h4></Link>
-                <Link to='/FindByProduct'><h4 className="nav-bar-links__item">By Product</h4></Link>
+                <Link to='/FindByProduct'><h4 className="nav-bar-links__item">By Specialty</h4></Link>
                 <Link to='/Mailbox'><h4 className="nav-bar-links__item">Your Mail</h4></Link>
             </div>
             <hr className="nav-bar__line"/>

@@ -176,6 +176,7 @@ GET http://localhost:8080/api/countries/:countryId/users
 Returns a list of all users with a country id that matches the parameter country id.
 
 {
+    id: user_id
     first_name: first_name
     last_name: last_name
     country_id: country_id

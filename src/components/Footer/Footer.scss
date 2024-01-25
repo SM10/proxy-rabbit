@@ -16,6 +16,10 @@
         gap: 2rem;
     }
 
+    &--invisible{
+        display: none;
+    }
+
     &__line{
         position: absolute;
         top: 0.1rem;

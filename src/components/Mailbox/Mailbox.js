@@ -21,7 +21,7 @@ function Mailbox(){
         }
     }
 
-    return (<main className="mail main" onClick={onClick}>
+    return (<main className="mail main">
         <div className="mail-chatlist-container" ref={chatListRef}>
             <ChatList />
         </div>

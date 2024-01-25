@@ -13,12 +13,12 @@ import PageNotFound from './components/PageNotFound/PageNotFound'
 import UserPopup from './components/UserPopup/UserPopup'
 import { useState, useEffect } from 'react';
 
+
 function App() {
   const [showUserPopup, setShowUserPopup] = useState(false);
   const [showContactUserPopup, setShowContactUserPopup] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [userProfile, setUserProfile] = useState(null);
-
   return (
     <BrowserRouter>
       <Header isLoggedIn={isLoggedIn} userProfile={userProfile}/>
@@ -34,7 +34,7 @@ function App() {
         <Route path='/Mailbox' element={<Mailbox />} />
         <Route path='*' element={<PageNotFound />} />
       </Routes>
-      <Footer />
+      <Footer/>
     </BrowserRouter>
   );
 }

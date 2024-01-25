@@ -1,8 +1,15 @@
 import "./Footer.scss"
+import { useLocation } from 'react-router-dom';
+import {useState, useEffect} from 'react';
 
 function Footer(){
+    const location = useLocation()
+    const [hasFooter, setHasFooter] = useState(true);
+    useEffect(()=>{
+        setHasFooter(!location.pathname.includes("/Mailbox"))
+      }, [location])
     
-    return (<footer className="footer">
+    return (<footer className={`footer${hasFooter ? '': '--invisible'}`}>
         <hr className="footer__line"/>
         <div className="footer-content">
             <div className="footer-content-about">

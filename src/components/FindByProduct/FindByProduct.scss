@@ -44,6 +44,14 @@
                     flex-grow: 0;
                     width: 40%;
                 }
+
+                &__input{
+                    @include input;
+                }
+
+                &__button{
+                    @include search-button;
+                }
             }
 
             &-content{

@@ -1,17 +1,42 @@
 import "./Register.scss"
 import {useState, useEffect} from 'react';
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 function Register(){
-
+    const navigate = useNavigate();
     const [isEmailValid, setIsEmailValid] = useState(true);
     const [isFirstNameValid, setIsFirstNameValid] = useState(true);
     const [isLastNameValid, setIsLastNameValid] = useState(true);
     const [isPasswordValid, setIsPasswordValid] = useState(true);
+    const [countries, setCountries] = useState([]);
     
     function onEmailChanged(){if(!isEmailValid) setIsEmailValid(true)}
     function onFirstNameChanged(){if(!isFirstNameValid) setIsFirstNameValid(true)}
     function onLastNameChanged(){if(!isLastNameValid) setIsLastNameValid(true)}
     function onPasswordChanged(){if(!isPasswordValid) setIsPasswordValid(true)} 
+
+    useEffect(() => {
+        (async () =>{
+        try{
+            const response = await axios.get(`${process.env.REACT_APP_BASE_URL}/api/countries`)
+            setCountries(response.data);
+        }catch(error){
+            console.log(error);
+        }
+    })()
+    }, [])
+
+    if(!countries || countries.length === 0){
+        <div className="register">
+        <div className="register-container">
+            <h1 className="register-container__header">Register</h1>
+            <div className="register-container-loading">
+                <h3 className="register-container-loading__text">Loading</h3>
+            </div>
+        </div>
+        </div>
+    }
 
     function onSubmit(e){
         e.preventDefault()
@@ -21,7 +46,26 @@ function Register(){
         if(!email.match(/.+[@]{1}.+[.]{1}[a-zA-Z]+/g)){setIsEmailValid(false);}
         if(e.target.firstName.value === ''){setIsFirstNameValid(false)}
         if(e.target.lastName.value === ''){setIsLastNameValid(false)}
-        if(!e.target.password.value.match(/[0-9a-zA-Z]{6,}/g)){setIsPasswordValid(false)}
+        if(!e.target.password.value.match(/.{6,}/g)){setIsPasswordValid(false)}
+
+        if(!isEmailValid||!isFirstNameValid||!isLastNameValid||!isPasswordValid){return}
+
+        (async () =>{
+            const countryId = countries.find(country => country.name === e.target.country.value).id
+
+            try{
+                await axios.post(`${process.env.REACT_APP_BASE_URL}/api/register`,{
+                    email: e.target.email.value,
+                    password: e.target.password.value,
+                    first_name: e.target.firstName.value,
+                    last_name: e.target.lastName.value,
+                    country_id: countryId
+                })
+                navigate('/')
+            }catch(error){
+                console.log(error)
+            }
+        })()
 
         e.target.reset();
     }
@@ -45,6 +89,15 @@ function Register(){
                     <p className="register-container-form-last-name__label">Last Name</p>
                     <input name="lastName" type="text" id="register-last-name" className="register-container-form-last-name__input" onChange={()=>{onLastNameChanged()}}/>
                     <p className={`register-container-form-last-name__error${isLastNameValid ? '' : '--active'}`}>Please fill in a last name</p>
+                </label>
+                <label htmlFor="register-country" className="register-container-form-country">
+                    <p className="register-container-form-country__label">Last Name</p>
+                    <select name="country" id="register-country" className="register-container-form-country__input">
+                        {countries.map(country => {
+                            return(<option value={country.name} key={country.id}>{country.name}</option>)
+                        })}
+                    </select>
+                    <div className="register-container-form-country__holder"></div>
                 </label>
                 <label htmlFor="register-password" className="register-container-form-password">
                 <p className="register-container-form-password__label">Password</p>

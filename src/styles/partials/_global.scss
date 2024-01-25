@@ -81,6 +81,15 @@ $color-bold-red: #ff1300;
             position: relative;
 }
 
+@mixin scroll-bar{
+    width: 0.25rem;
+    background-color: $color-light-gray;
+}
+
+@mixin scroll-bar-thumb{
+    background-color: $color-black
+}
+
 *{
     box-sizing: border-box;
     padding: 0;

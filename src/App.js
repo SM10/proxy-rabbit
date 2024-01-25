@@ -12,6 +12,7 @@ import Register from './components/Register/Register'
 import PageNotFound from './components/PageNotFound/PageNotFound'
 import UserPopup from './components/UserPopup/UserPopup'
 import { useState, useEffect } from 'react';
+import axios from 'axios';
 
 
 function App() {
@@ -19,7 +20,18 @@ function App() {
   const [showContactUserPopup, setShowContactUserPopup] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [userProfile, setUserProfile] = useState(null);
-  
+  const [countries, setCountries] = useState([]);
+
+  useEffect(()=>{
+    (async ()=>{
+      try{
+        const response = await axios.get(`${process.env.REACT_APP_BASE_URL}/api/countries`)
+        setCountries(response.data);
+      }catch(error){
+        console.log(error)
+      }
+    })()
+  }, [])
 
   return (
     <BrowserRouter>
@@ -27,8 +39,8 @@ function App() {
       {showUserPopup ? <UserPopup /> : ''}
       {showContactUserPopup ? <ContactUserPopup /> : ''}
       <Routes >
-        <Route path='/' element={<FindByLocation />} />
-        <Route path='/FindByLocation' element={<FindByLocation />} />
+        <Route path='/' element={<FindByLocation supportedCountries={countries}/>} />
+        <Route path='/FindByLocation' element={<FindByLocation supportedCountries={countries}/>} />
         <Route path='/FindByProduct' element={<FindByProduct />} />
         <Route path='/Login' element={<Login />} />
         <Route path='/Logout' element={<Logout />} />

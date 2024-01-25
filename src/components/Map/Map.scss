@@ -8,5 +8,13 @@
         &:hover{
             fill: $color-bold-red;
         }
+
+        &--unsupported{
+            fill: $color-light-black;
+
+            &:hover{
+                fill: $color-light-red;
+            }
+        }
     }
 }

@@ -19,23 +19,23 @@ function FindByProduct(){
 
     useEffect(()=>{
         let productCardBatches = [];
-            let counter = 0;
-            while(counter < discoverProducts.length){
-                productCardBatches.push((<div className="findbyproduct-find-body-slide-batch">
-                    {(()=>{
-                        const productArray = []
-                        let innerCounter = 0
-                        while(counter < discoverProducts.length && innerCounter < 3){
-                            productArray.push(<ProductCard product={{image: discoverProducts[counter].image_url, name:discoverProducts[counter].name, description: discoverProducts[counter].country_name}} />   )
-                            innerCounter++
-                            counter++
-                        }
-                        return productArray
-                    })()}
-                </div>))
-            }
-            setDiscoverProductsHtml(productCardBatches)
-    }, discoverProducts)
+        let counter = 0;
+        while(counter < discoverProducts.length){
+            productCardBatches.push((<div className="findbyproduct-find-body-slide-batch">
+                {(()=>{
+                    const productArray = []
+                    let innerCounter = 0
+                    while(counter < discoverProducts.length && innerCounter < 3){
+                        productArray.push(<ProductCard product={{image: discoverProducts[counter].image_url, name:discoverProducts[counter].name, description: discoverProducts[counter].country_name}} />   )
+                        innerCounter++
+                        counter++
+                    }
+                    return productArray
+                })()}
+            </div>))
+        }
+        setDiscoverProductsHtml(productCardBatches)
+    }, [discoverProducts])
 
     useEffect(()=>{
         let productCardBatches = [];
@@ -136,13 +136,9 @@ function FindByProduct(){
                 <hr className="findbyproduct-find-head__line--bottom" />
             </div>
             <div className="findbyproduct-find-body">
-                <Slide className="findbyproduct-find-body-slide"> 
+                <Slide className="findbyproduct-find-body-slide" duration={360000}> 
                     {searchedProductsHtml}
-                    {/*<div className="findbyproduct-find-body-slide-batch">
-                    <ProductCard product={{image: mascot, name:"Proxy Rabbit", description: "The website mascot"}} />   
-                    <ProductCard product={{image: mascot, name:"Proxy Rabbit", description: "The website mascot"}} />
-                    <ProductCard product={{image: mascot, name:"Proxy Rabbit", description: "The website mascot"}} />
-                    </div>*/}
+                                     
                 </Slide>
             </div>
         </section>
@@ -155,7 +151,9 @@ function FindByProduct(){
                 <hr className="findbyproduct-popular-head__line--bottom" />
             </div>
             <div className="findbyproduct-popular-body">
-            <Slide className="findbyproduct-popular-body-slide">{popularProductsHtml} </Slide>
+            <Slide className="findbyproduct-popular-body-slide" duration={360000}>
+                {popularProductsHtml}
+            </Slide>
             </div>
         </section>
         <section className="findbyproduct-discovery">
@@ -167,7 +165,9 @@ function FindByProduct(){
                 <hr className="findbyproduct-discovery-head__line--bottom" />
             </div>
             <div className="findbyproduct-discovery-body">
-            <Slide className="findbyproduct-discovery-body-slide">{discoverProductsHtml} </Slide>
+            <Slide className="findbyproduct-discovery-body-slide" duration={360000}>
+                {discoverProductsHtml}
+            </Slide>
             </div>
         </section>
     </main>)

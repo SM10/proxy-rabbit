@@ -1,7 +1,7 @@
 import './ProductCard.scss';
 
-function ProductCard({product}){
-    return(<div className='product-card'>
+function ProductCard({product, onCardClicked}){
+    return(<div className='product-card' onClick={(e) => {onCardClicked(product.country_id)}}>
     <div className='product-card-container'>
         <img className='product-card-container__image' src={`${product.image}`} alt={product.name}/>
         <div className='product-card-container-right'>

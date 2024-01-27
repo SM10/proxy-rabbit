@@ -6,7 +6,7 @@ import {Slide} from 'react-slideshow-image';
 import 'react-slideshow-image/dist/styles.css';
 import axios from "axios";
 
-function FindByProduct(){
+function FindByProduct({onProductCardClicked}){
 
     const [searchInput, setSearchInput] = useState('')
     const [searchedProducts, setSearchedProducts] = useState([]);
@@ -26,7 +26,7 @@ function FindByProduct(){
                     const productArray = []
                     let innerCounter = 0
                     while(counter < discoverProducts.length && innerCounter < 3){
-                        productArray.push(<ProductCard product={{image: discoverProducts[counter].image_url, name:discoverProducts[counter].name, description: discoverProducts[counter].country_name}} />   )
+                        productArray.push(<ProductCard onCardClicked={onProductCardClicked} product={{country_id: discoverProducts[counter].country_id, image: discoverProducts[counter].image_url, name:discoverProducts[counter].name, description: discoverProducts[counter].country_name}} />   )
                         innerCounter++
                         counter++
                     }
@@ -46,7 +46,7 @@ function FindByProduct(){
                     const productArray = []
                     let innerCounter = 0
                     while(counter < popularProducts.length && innerCounter < 3){
-                        productArray.push(<ProductCard product={{image: popularProducts[counter].image_url, name:popularProducts[counter].name, description: popularProducts[counter].country_name}} />   )
+                        productArray.push(<ProductCard onCardClicked={onProductCardClicked} product={{country_id: popularProducts[counter].country_id, image: popularProducts[counter].image_url, name:popularProducts[counter].name, description: popularProducts[counter].country_name}} />   )
                         innerCounter++
                         counter++
                     }
@@ -66,7 +66,7 @@ function FindByProduct(){
                         const productArray = []
                         let innerCounter = 0
                         while(counter < searchedProducts.length && innerCounter < 3){
-                            productArray.push(<ProductCard product={{image: searchedProducts[counter].image_url, name:searchedProducts[counter].name, description: searchedProducts[counter].country_name}} />   )
+                            productArray.push(<ProductCard onCardClicked={onProductCardClicked} product={{country_id: searchedProducts[counter].country_id, image: searchedProducts[counter].image_url, name:searchedProducts[counter].name, description: searchedProducts[counter].country_name}} />   )
                             innerCounter++
                             counter++
                         }
@@ -119,6 +119,15 @@ function FindByProduct(){
 
     const onSubmit = (e) => {
         e.preventDefault();
+
+        (async ()=>{
+            try{
+                const response = await axios.get(`${process.env.REACT_APP_BASE_URL}/api/products/search/${e.target.search.value}`)
+                setSearchedProducts(response.data);
+            }catch(error){
+                console.log(error)
+            }
+        })()
     }
 
     //2 cards on mobile, 3 on tablet

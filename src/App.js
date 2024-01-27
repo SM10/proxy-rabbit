@@ -41,14 +41,17 @@ function App() {
   }, [users])
 
   const onCountryClicked = async (countryObject) =>{
-      try{
-        console.log(`${process.env.REACT_APP_BASE_URL}/api/countries/${countryObject.id}/users`)
-        const response = await axios.get(`${process.env.REACT_APP_BASE_URL}/api/countries/${countryObject.id}/users`)
-        console.log(response.data);
-        setUsers(response.data);
-      }catch(error){
-        console.log(error)
-      }
+      getUsersByCountryId(countryObject.id)
+  }
+
+  const getUsersByCountryId = async (countryId) => {
+    try{
+      const response = await axios.get(`${process.env.REACT_APP_BASE_URL}/api/countries/${countryId}/users`)
+      console.log(response.data);
+      setUsers(response.data);
+    }catch(error){
+      console.log(error)
+    }
   }
 
   return (
@@ -59,7 +62,7 @@ function App() {
       <Routes >
         <Route path='/' element={<FindByLocation supportedCountries={countries} onCountryClicked={onCountryClicked}/>} />
         <Route path='/FindByLocation' element={<FindByLocation supportedCountries={countries} onCountryClicked={onCountryClicked}/>} />
-        <Route path='/FindByProduct' element={<FindByProduct />} />
+        <Route path='/FindByProduct' element={<FindByProduct onProductCardClicked={getUsersByCountryId}/>} />
         <Route path='/Login' element={<Login />} />
         <Route path='/Logout' element={<Logout />} />
         <Route path='/Register' element={<Register />} />

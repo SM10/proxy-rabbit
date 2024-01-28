@@ -2,6 +2,7 @@ import './Chatbox.scss';
 import UserCard from '../UserCard/UserCard';
 import send from '../../assets/icons/send_FILL0_wght400_GRAD0_opsz24.svg'
 import back from '../../assets/icons/arrow_back_FILL0_wght400_GRAD0_opsz24.svg'
+import axios from 'axios';
 
 function Chatbox({user, recipient, messageList}){
 
@@ -17,6 +18,24 @@ function Chatbox({user, recipient, messageList}){
             <p className='recipient-message__message'>{message}</p>
             <p className='recipient-message__timestamp'>{timestamp}</p>
         </div>)
+    }
+
+    const sendMessage = (e) =>{
+        e.preventDefault();
+        const sendObject = {
+            room_id: recipient.room_id,
+            recipient_id: recipient.recipient_id,
+            message: e.target.message.value
+        };
+        (async ()=>{
+            try{
+                const response = await axios.post(`${process.env.REACT_APP_BASE_URL}/api/message`, sendObject)
+                
+            }catch(error){
+                console.log(error)
+            }
+        })();
+        e.target.reset();
     }
 
     if(!recipient){
@@ -44,21 +63,10 @@ function Chatbox({user, recipient, messageList}){
                     return recipient_window(message.message, message.timestamp)
                 }
             })}
-            {/*user_window("User's Message", 12983447)}
-            {recipient_window("Recipient's Message", 12948558)}
-            {recipient_window("Recipient's Message", 12948558)}
-            {recipient_window("Recipient's Message", 12948558)}
-            {recipient_window("Recipient's Message", 12948558)}
-            {recipient_window("Recipient's Message", 12948558)}
-            {recipient_window("Recipient's Message", 12948558)}
-            {recipient_window("Recipient's Message", 12948558)}
-            {recipient_window("Recipient's Message", 12948558)}
-            {recipient_window("Recipient's Message", 12948558)}
-        {recipient_window("Recipient's Message", 12948558)*/}
         </div>
-        <form className='chatbox-form'>
-            <div className='chatbox-form-container'>
-                <textarea placeholder='Send a Message' className='chatbox-form-container__input'/>
+        <form className='chatbox-form' onSubmit={sendMessage}>
+            <div className='chatbox-form-container' >
+                <textarea placeholder='Send a Message' name="message" className='chatbox-form-container__input'/>
                 <button type='submit' className='chatbox-form-container__button'><img src={send} alt="Send button icon"/></button>
             </div>
         </form>

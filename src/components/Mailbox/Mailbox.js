@@ -57,7 +57,7 @@ function Mailbox({userProfile}){
             <ChatList chatList={chatList} onUserClicked={onRecipientClicked}/>
         </div>
         <div className="mail-chatbox-container" ref={chatBoxRef}>
-            <ChatBox recipient={selectedRecipient} user={userProfile} messageList={messageList}/>
+            <ChatBox recipient={selectedRecipient} user={userProfile} messageList={messageList} setMessageList={setMessageList}/>
         </div>
     </main>)
 }

@@ -3,8 +3,21 @@ import UserCard from '../UserCard/UserCard';
 import send from '../../assets/icons/send_FILL0_wght400_GRAD0_opsz24.svg'
 import back from '../../assets/icons/arrow_back_FILL0_wght400_GRAD0_opsz24.svg'
 import axios from 'axios';
+import {io} from 'socket.io-client'
 
-function Chatbox({user, recipient, messageList}){
+function Chatbox({user, recipient, messageList, setMessageList}){
+    const socket = io(process.env.REACT_APP_BASE_URL);
+
+    console.log(socket.connect());
+
+    socket.on("message", (message)=>{
+        setMessageList([...messageList, message])
+        if(message.from_id === user.id){
+            user_window(message.message, )
+        }else{
+
+        }
+    })
 
     const user_window = (message, timestamp, key) => {
         return(<div className='user-message' key={key}>

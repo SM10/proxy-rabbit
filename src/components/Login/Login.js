@@ -1,9 +1,12 @@
 import "./Login.scss"
 import {useState, useEffect} from 'react';
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
-function Login(){
+function Login({setIsLoggedIn, setUserProfile}){
 
     const [isInputValid, setIsInputValid] = useState(true);
+    const navigate = useNavigate();
     
     function onInputChanged(){
         if(!isInputValid) setIsInputValid(true)
@@ -13,11 +16,27 @@ function Login(){
         e.preventDefault()
 
         const email = e.target.email.value;
+        const password = e.target.password.value;
 
         if(!email.match(/.+[@]{1}.+[.]{1}[a-zA-Z]+/g)){
             setIsInputValid(false);
             return;
         }
+
+        (async ()=>{
+            try{
+                const response = await axios.post(`${process.env.REACT_APP_BASE_URL}/api/login`, {
+                    email: email,
+                    password: password
+                })
+                console.log(response.data);
+                setUserProfile(response.data);
+                setIsLoggedIn(true);
+                navigate('/');
+            }catch(error){
+                console.log(error);
+            }
+        })()
 
         e.target.reset();
     }

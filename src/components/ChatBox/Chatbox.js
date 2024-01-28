@@ -4,19 +4,19 @@ import send from '../../assets/icons/send_FILL0_wght400_GRAD0_opsz24.svg'
 import back from '../../assets/icons/arrow_back_FILL0_wght400_GRAD0_opsz24.svg'
 import axios from 'axios';
 import {io} from 'socket.io-client'
+import {useRef} from 'react'
 
 function Chatbox({user, recipient, messageList, setMessageList}){
-    const socket = io(process.env.REACT_APP_BASE_URL);
+    const socket = io(process.env.REACT_APP_BASE_URL, {user: user});
 
-    console.log(socket.connect());
+    socket.connect();
+    socket.on("connect", function(){
+        socket.emit("data", user)
+    })
 
-    socket.on("message", (message)=>{
-        setMessageList([...messageList, message])
-        if(message.from_id === user.id){
-            user_window(message.message, )
-        }else{
-
-        }
+    socket.on("message", (postedMessage)=>{
+        console.log(postedMessage);
+        setMessageList([postedMessage, ...messageList])
     })
 
     const user_window = (message, timestamp, key) => {
@@ -70,8 +70,10 @@ function Chatbox({user, recipient, messageList, setMessageList}){
         </div>
         <div className='chatbox-messages'>
             {messageList.map((message, index) => {
-                if(message.from_id === user.id){
-                    return user_window(message.messsage, message.timestamp, index)
+                console.log(message.from_id)
+                console.log(user.user_id);
+                if(message.from_id === user.user_id){
+                    return user_window(message.message, message.timestamp, index)
                 }else{
                     return recipient_window(message.message, message.timestamp, index)
                 }

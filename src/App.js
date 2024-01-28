@@ -22,6 +22,7 @@ function App() {
   const [userProfile, setUserProfile] = useState(null);
   const [countries, setCountries] = useState([]);
   const [users, setUsers] = useState([])
+  axios.defaults.withCredentials = true;
 
   useEffect(()=>{
     (async ()=>{

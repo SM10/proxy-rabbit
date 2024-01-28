@@ -25,9 +25,9 @@ function Mailbox({userProfile}){
 
     useEffect(()=>{
         if(selectedRecipient){
+            console.log(selectedRecipient);
             (async ()=>{try{
                 const response = await axios.get(`${process.env.REACT_APP_BASE_URL}/api/message/${selectedRecipient.room_id}`, {withCredentials: true})
-                console.log(userProfile)
                 setMessageList(response.data);
             }catch(error){
                 console.log(error)
@@ -57,7 +57,7 @@ function Mailbox({userProfile}){
             <ChatList chatList={chatList} onUserClicked={onRecipientClicked}/>
         </div>
         <div className="mail-chatbox-container" ref={chatBoxRef}>
-            <ChatBox recipient={selectedRecipient} user={userProfile} messageList={messageList}/>
+            <ChatBox recipient={selectedRecipient} user={userProfile} messageList={messageList} setMessageList={setMessageList}/>
         </div>
     </main>)
 }

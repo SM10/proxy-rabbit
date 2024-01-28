@@ -5,7 +5,6 @@ function Map({onCountryClicked, supportedCountries}){
      const onClickSupported = (e) => {
           const countryName = e.target.getAttribute('title');
           const countryObject = supportedCountries.find(c => c.name === countryName);
-          console.log(countryObject)
           onCountryClicked(countryObject);
      }
 

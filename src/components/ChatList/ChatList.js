@@ -1,11 +1,20 @@
 import './ChatList.scss';
 import UserCard from '../UserCard/UserCard';
 
-function ChatList(){
+function ChatList({chatList, onUserClicked}){
+
     return(
     <section className='chatlist'>
         <div className='chatlist-container'>
-            <UserCard user={{first_name: "Stephen", last_name: "Man"}} country ="Canada" />
+            {chatList.map(chatItem => {
+                return(<UserCard user={{
+                    first_name: chatItem.recipient_first_name, 
+                    last_name: chatItem.recipient_last_name,
+                    country_name: chatItem.recipient_country_name,
+                    room_id: chatItem.room_id,
+                    id: chatItem.recipient_id
+                }} onUserCardClicked={onUserClicked}/>)
+            })}
         </div>
     </section>)
 }

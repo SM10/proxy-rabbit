@@ -26,7 +26,7 @@ function UserPopup({users, onCloseClicked}){
             </div>
             <div className="user-popup-cards">
                 {users.map(user => {
-                    return(<UserCard user={user} country={user.country_name}/>)
+                    return(<UserCard user={user} key={user.id}/>)
                 })}
             </div>
         </section>

@@ -64,9 +64,8 @@ function App() {
         <Route path='/FindByLocation' element={<FindByLocation supportedCountries={countries} onCountryClicked={onCountryClicked}/>} />
         <Route path='/FindByProduct' element={<FindByProduct onProductCardClicked={getUsersByCountryId}/>} />
         <Route path='/Login' element={<Login setIsLoggedIn={setIsLoggedIn} setUserProfile={setUserProfile}/>} />
-        <Route path='/Logout' element={<Logout />} />
         <Route path='/Register' element={<Register />} />
-        <Route path='/Mailbox' element={<Mailbox />} />
+        <Route path='/Mailbox' element={<Mailbox userProfile={userProfile}/>} />
         <Route path='*' element={<PageNotFound />} />
       </Routes>
       <Footer/>

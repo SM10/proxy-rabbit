@@ -28,8 +28,8 @@ function Login({setIsLoggedIn, setUserProfile}){
                 const response = await axios.post(`${process.env.REACT_APP_BASE_URL}/api/login`, {
                     email: email,
                     password: password
-                })
-                console.log(response.data);
+                }, {withCredentials: true})
+                console.log(response);
                 setUserProfile(response.data);
                 setIsLoggedIn(true);
                 navigate('/');

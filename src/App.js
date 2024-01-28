@@ -66,7 +66,7 @@ function App() {
         <Route path='/Login' element={<Login setIsLoggedIn={setIsLoggedIn} setUserProfile={setUserProfile}/>} />
         <Route path='/Logout' element={<Logout />} />
         <Route path='/Register' element={<Register />} />
-        <Route path='/Mailbox' element={<Mailbox />} />
+        <Route path='/Mailbox' element={<Mailbox userProfile={userProfile}/>} />
         <Route path='*' element={<PageNotFound />} />
       </Routes>
       <Footer/>

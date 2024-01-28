@@ -1,16 +1,29 @@
 import "./Header.scss"
 import logo from '../../assets/images/proxy-rabbit-logo.png'
 import mailIcon from '../../assets/icons/mail_FILL0_wght400_GRAD0_opsz24.svg'
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
+import axios from "axios"
 
-function Header({isLoggedIn, userProfile}){
+function Header({isLoggedIn, userProfile, setLoggedIn, setUserProfile}){
     let contentObjects;
+    const navigate = useNavigate();
+
+    const logout = ()=>{
+        try{
+            const response = axios.post(`${process.env.REACT_APP_BASE_URL}/api/logout`);
+            setUserProfile(null);
+            setLoggedIn(false);
+            navigate('/');
+        }catch(error){
+            console.log(error)
+        }
+    }
 
     if(isLoggedIn){
         contentObjects = (<div className="header-content">
             <Link to='/Mailbox'><img src={mailIcon} alt="Mail button" className="header-content__mail"/></Link>
             <h4 className="header-content__greeting">Hello, {userProfile.first_name}</h4>
-            <Link to='/Logout'><h4 className="header-content__text--clickable">Logout</h4></Link>
+            <h4 className="header-content__text--clickable" onClick={() => {logout()}}>Logout</h4>
         </div>)
     }else{
         contentObjects = (<div className="header-content">

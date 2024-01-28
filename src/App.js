@@ -56,14 +56,14 @@ function App() {
 
   return (
     <BrowserRouter>
-      <Header isLoggedIn={isLoggedIn} userProfile={userProfile}/>
+      <Header isLoggedIn={isLoggedIn} userProfile={userProfile} setLoggedIn={setIsLoggedIn} setUserProfile={setUserProfile}/>
       {showUserPopup ? <UserPopup users={users} onCloseClicked={() => {setShowUserPopup(false);}}/> : ''}
       {showContactUserPopup ? <ContactUserPopup /> : ''}
       <Routes >
         <Route path='/' element={<FindByLocation supportedCountries={countries} onCountryClicked={onCountryClicked}/>} />
         <Route path='/FindByLocation' element={<FindByLocation supportedCountries={countries} onCountryClicked={onCountryClicked}/>} />
         <Route path='/FindByProduct' element={<FindByProduct onProductCardClicked={getUsersByCountryId}/>} />
-        <Route path='/Login' element={<Login />} />
+        <Route path='/Login' element={<Login setIsLoggedIn={setIsLoggedIn} setUserProfile={setUserProfile}/>} />
         <Route path='/Logout' element={<Logout />} />
         <Route path='/Register' element={<Register />} />
         <Route path='/Mailbox' element={<Mailbox />} />

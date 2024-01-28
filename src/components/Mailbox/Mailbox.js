@@ -25,9 +25,9 @@ function Mailbox({userProfile}){
 
     useEffect(()=>{
         if(selectedRecipient){
+            console.log(selectedRecipient);
             (async ()=>{try{
                 const response = await axios.get(`${process.env.REACT_APP_BASE_URL}/api/message/${selectedRecipient.room_id}`, {withCredentials: true})
-                console.log(userProfile)
                 setMessageList(response.data);
             }catch(error){
                 console.log(error)

@@ -6,15 +6,15 @@ import axios from 'axios';
 
 function Chatbox({user, recipient, messageList}){
 
-    const user_window = (message, timestamp) => {
-        return(<div className='user-message'>
+    const user_window = (message, timestamp, key) => {
+        return(<div className='user-message' key={key}>
             <p className='user-message__message'>{message}</p>
             <p className='user-message__timestamp'>{timestamp}</p>
         </div>)
     }
 
-    const recipient_window = (message, timestamp) => {
-        return(<div className='recipient-message'>
+    const recipient_window = (message, timestamp, key) => {
+        return(<div className='recipient-message' key={key}>
             <p className='recipient-message__message'>{message}</p>
             <p className='recipient-message__timestamp'>{timestamp}</p>
         </div>)
@@ -24,12 +24,12 @@ function Chatbox({user, recipient, messageList}){
         e.preventDefault();
         const sendObject = {
             room_id: recipient.room_id,
-            recipient_id: recipient.recipient_id,
+            recipient_id: recipient.id,
             message: e.target.message.value
         };
         (async ()=>{
             try{
-                const response = await axios.post(`${process.env.REACT_APP_BASE_URL}/api/message`, sendObject)
+                const response = await axios.post(`${process.env.REACT_APP_BASE_URL}/api/message`,sendObject)
                 
             }catch(error){
                 console.log(error)
@@ -56,11 +56,11 @@ function Chatbox({user, recipient, messageList}){
             </div>
         </div>
         <div className='chatbox-messages'>
-            {messageList.map(message => {
+            {messageList.map((message, index) => {
                 if(message.from_id === user.id){
-                    return user_window(message.messsage, message.timestamp)
+                    return user_window(message.messsage, message.timestamp, index)
                 }else{
-                    return recipient_window(message.message, message.timestamp)
+                    return recipient_window(message.message, message.timestamp, index)
                 }
             })}
         </div>

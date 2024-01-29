@@ -4,7 +4,7 @@ import send from '../../assets/icons/send_FILL0_wght400_GRAD0_opsz24.svg'
 import back from '../../assets/icons/arrow_back_FILL0_wght400_GRAD0_opsz24.svg'
 import axios from 'axios';
 import {io} from 'socket.io-client'
-import {useRef} from 'react'
+import {useRef, useEffect} from 'react'
 
 function Chatbox({user, recipient, messageList, setMessageList}){
     const socket = io(process.env.REACT_APP_BASE_URL, {user: user});
@@ -50,7 +50,6 @@ function Chatbox({user, recipient, messageList, setMessageList}){
         })();
         e.target.reset();
     }
-
     if(!recipient){
         return(<></>)
     }

@@ -26,7 +26,7 @@ function FindByProduct({onProductCardClicked}){
                     const productArray = []
                     let innerCounter = 0
                     while(counter < discoverProducts.length && innerCounter < 3){
-                        productArray.push(<ProductCard onCardClicked={onProductCardClicked} product={{country_id: discoverProducts[counter].country_id, image: discoverProducts[counter].image_url, name:discoverProducts[counter].name, description: discoverProducts[counter].country_name}} />   )
+                        productArray.push(<ProductCard key={discoverProducts[counter].id} onCardClicked={onProductCardClicked} product={{country_id: discoverProducts[counter].country_id, image: discoverProducts[counter].image_url, name:discoverProducts[counter].name, description: discoverProducts[counter].country_name}} />   )
                         innerCounter++
                         counter++
                     }
@@ -46,7 +46,7 @@ function FindByProduct({onProductCardClicked}){
                     const productArray = []
                     let innerCounter = 0
                     while(counter < popularProducts.length && innerCounter < 3){
-                        productArray.push(<ProductCard onCardClicked={onProductCardClicked} product={{country_id: popularProducts[counter].country_id, image: popularProducts[counter].image_url, name:popularProducts[counter].name, description: popularProducts[counter].country_name}} />   )
+                        productArray.push(<ProductCard key={popularProducts[counter].id} onCardClicked={onProductCardClicked} product={{country_id: popularProducts[counter].country_id, image: popularProducts[counter].image_url, name:popularProducts[counter].name, description: popularProducts[counter].country_name}} />   )
                         innerCounter++
                         counter++
                     }
@@ -66,7 +66,7 @@ function FindByProduct({onProductCardClicked}){
                         const productArray = []
                         let innerCounter = 0
                         while(counter < searchedProducts.length && innerCounter < 3){
-                            productArray.push(<ProductCard onCardClicked={onProductCardClicked} product={{country_id: searchedProducts[counter].country_id, image: searchedProducts[counter].image_url, name:searchedProducts[counter].name, description: searchedProducts[counter].country_name}} />   )
+                            productArray.push(<ProductCard key={searchedProducts[counter].id} onCardClicked={onProductCardClicked} product={{country_id: searchedProducts[counter].country_id, image: searchedProducts[counter].image_url, name:searchedProducts[counter].name, description: searchedProducts[counter].country_name}} />   )
                             innerCounter++
                             counter++
                         }

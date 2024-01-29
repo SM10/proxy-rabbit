@@ -13,7 +13,7 @@ function ChatList({chatList, onUserClicked}){
                     country_name: chatItem.recipient_country_name,
                     room_id: chatItem.room_id,
                     id: chatItem.recipient_id
-                }} onUserCardClicked={onUserClicked}/>)
+                }} onUserCardClicked={onUserClicked} showArrow={true}/>)
             })}
         </div>
     </section>)

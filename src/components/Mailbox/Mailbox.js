@@ -25,7 +25,6 @@ function Mailbox({userProfile}){
 
     useEffect(()=>{
         if(selectedRecipient){
-            console.log(selectedRecipient);
             (async ()=>{try{
                 const response = await axios.get(`${process.env.REACT_APP_BASE_URL}/api/message/${selectedRecipient.room_id}`, {withCredentials: true})
                 setMessageList(response.data);
@@ -35,21 +34,19 @@ function Mailbox({userProfile}){
             })()
         }
     }, [selectedRecipient])
-    
-    function onClick(e){
-        if(isOnChatList){
-            chatListRef.current.style.left = "-100%";
-            chatBoxRef.current.style.right = "0";
-            setIsOnChatList(false)
-        }else{
-            chatListRef.current.style.left = "0";
-            chatBoxRef.current.style.right = "-100%";
-            setIsOnChatList(true)
-        }
-    }
 
     const onRecipientClicked = (recipient) =>{
         setSelectedRecipient(recipient)
+    }
+
+    if(!userProfile){
+        return (<main className="mail-unlogged main">
+            <section className="mail-unlogged-outer">
+                <div className="mail-unlogged-outer-container">
+                    <h2 className="mail-unlogged-outer-container__text">User must be logged in to view this page</h2>
+                </div>
+            </section>
+        </main>)
     }
 
     return (<main className="mail main">

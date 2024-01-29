@@ -9,6 +9,34 @@
         align-items: stretch;
     }
 
+    &-unlogged{
+        width: 100%;
+        padding-top: 3rem;
+        @include tablet{
+            @include page-boundaries;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        &-outer{
+            background-color: $color-black;
+            padding: 0.1rem;
+            width: fit-content;
+
+            &-container{
+                border: 0.1rem solid $color-white;
+                padding: 2rem;
+                color: white;
+                
+                &__text{
+                    @include subheader-text;
+                }
+            }
+        }
+    }
+
     &-chatlist-container{
         width: 100%;
         display:flex;

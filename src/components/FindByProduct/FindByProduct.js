@@ -1,81 +1,17 @@
 import "./FindByProduct.scss"
 import { useState, useEffect } from "react"
 import ProductCard from "../ProductCard/ProductCard"
+import ProductSlide from "../ProductSlide/ProductSlide"
 import mascot from "../../assets/images/proxy-rabbit-mascot.png"
-import {Slide} from 'react-slideshow-image';
-import 'react-slideshow-image/dist/styles.css';
 import axios from "axios";
 
 function FindByProduct({onProductCardClicked}){
 
     const [searchInput, setSearchInput] = useState('')
     const [searchedProducts, setSearchedProducts] = useState([]);
-    const [searchedProductsHtml, setSearchedProductsHtml] = useState([]);
     const [popularProducts, setPopularProducts] = useState([]);
-    const [popularProductsHtml, setPopularProductsHtml] = useState([]);
     const [discoverProducts, setDiscoverProducts] = useState([]);
-    const [discoverProductsHtml, setDiscoverProductsHtml] = useState([]);
     const [screenWidth, setScreenWidth] = useState(window.innerWidth);
-
-    useEffect(()=>{
-        let productCardBatches = [];
-        let counter = 0;
-        while(counter < discoverProducts.length){
-            productCardBatches.push((<div className="findbyproduct-find-body-slide-batch">
-                {(()=>{
-                    const productArray = []
-                    let innerCounter = 0
-                    while(counter < discoverProducts.length && innerCounter < 3){
-                        productArray.push(<ProductCard key={discoverProducts[counter].id} onCardClicked={onProductCardClicked} product={{country_id: discoverProducts[counter].country_id, image: discoverProducts[counter].image_url, name:discoverProducts[counter].name, description: discoverProducts[counter].country_name}} />   )
-                        innerCounter++
-                        counter++
-                    }
-                    return productArray
-                })()}
-            </div>))
-        }
-        setDiscoverProductsHtml(productCardBatches)
-    }, [discoverProducts])
-
-    useEffect(()=>{
-        let productCardBatches = [];
-        let counter = 0;
-        while(counter < popularProducts.length){
-            productCardBatches.push((<div className="findbyproduct-find-body-slide-batch">
-                {(()=>{
-                    const productArray = []
-                    let innerCounter = 0
-                    while(counter < popularProducts.length && innerCounter < 3){
-                        productArray.push(<ProductCard key={popularProducts[counter].id} onCardClicked={onProductCardClicked} product={{country_id: popularProducts[counter].country_id, image: popularProducts[counter].image_url, name:popularProducts[counter].name, description: popularProducts[counter].country_name}} />   )
-                        innerCounter++
-                        counter++
-                    }
-                    return productArray
-                })()}
-            </div>))
-        }
-        setPopularProductsHtml(productCardBatches)
-    }, [popularProducts])
-
-    useEffect(()=>{
-            let productCardBatches = [];
-            let counter = 0;
-            while(counter < searchedProducts.length){
-                productCardBatches.push((<div className="findbyproduct-find-body-slide-batch">
-                    {(()=>{
-                        const productArray = []
-                        let innerCounter = 0
-                        while(counter < searchedProducts.length && innerCounter < 3){
-                            productArray.push(<ProductCard key={searchedProducts[counter].id} onCardClicked={onProductCardClicked} product={{country_id: searchedProducts[counter].country_id, image: searchedProducts[counter].image_url, name:searchedProducts[counter].name, description: searchedProducts[counter].country_name}} />   )
-                            innerCounter++
-                            counter++
-                        }
-                        return productArray
-                    })()}
-                </div>))
-            }
-            setSearchedProductsHtml(productCardBatches)
-    }, [searchedProducts])
 
     useEffect(()=>{
         (async ()=>{
@@ -145,10 +81,10 @@ function FindByProduct({onProductCardClicked}){
                 <hr className="findbyproduct-find-head__line--bottom" />
             </div>
             <div className="findbyproduct-find-body">
-                <Slide className="findbyproduct-find-body-slide" duration={360000}> 
+                <ProductSlide productArray={searchedProducts} onProductCardClicked={onProductCardClicked}/>
+                {/*<Slide className="findbyproduct-find-body-slide" duration={360000}> 
                     {searchedProductsHtml}
-                                     
-                </Slide>
+</Slide>*/}
             </div>
         </section>
         <section className="findbyproduct-popular">
@@ -160,9 +96,7 @@ function FindByProduct({onProductCardClicked}){
                 <hr className="findbyproduct-popular-head__line--bottom" />
             </div>
             <div className="findbyproduct-popular-body">
-            <Slide className="findbyproduct-popular-body-slide" duration={360000}>
-                {popularProductsHtml}
-            </Slide>
+                <ProductSlide productArray={popularProducts} onProductCardClicked={onProductCardClicked}/>
             </div>
         </section>
         <section className="findbyproduct-discovery">
@@ -174,9 +108,7 @@ function FindByProduct({onProductCardClicked}){
                 <hr className="findbyproduct-discovery-head__line--bottom" />
             </div>
             <div className="findbyproduct-discovery-body">
-            <Slide className="findbyproduct-discovery-body-slide" duration={360000}>
-                {discoverProductsHtml}
-            </Slide>
+                <ProductSlide productArray={discoverProducts} onProductCardClicked={onProductCardClicked}/>
             </div>
         </section>
     </main>)

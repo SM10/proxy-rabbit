@@ -9,7 +9,6 @@ function FindByProduct({onProductCardClicked}){
     const [searchedProducts, setSearchedProducts] = useState([]);
     const [popularProducts, setPopularProducts] = useState([]);
     const [discoverProducts, setDiscoverProducts] = useState([]);
-    const [screenWidth, setScreenWidth] = useState(window.innerWidth);
 
     useEffect(()=>{
         (async ()=>{
@@ -37,14 +36,6 @@ function FindByProduct({onProductCardClicked}){
             }
         })();
         
-
-        function onWindowResize(){
-            setScreenWidth(window.innerWidth);
-        }
-
-        setScreenWidth(window.innerWidth);
-        window.addEventListener("resize", onWindowResize)
-        return () => window.removeEventListener("resize", onWindowResize)
     }, [])
 
     const onSearchChange = (e) => {
@@ -80,9 +71,6 @@ function FindByProduct({onProductCardClicked}){
             </div>
             <div className="findbyproduct-find-body">
                 <ProductSlide productArray={searchedProducts} onProductCardClicked={onProductCardClicked}/>
-                {/*<Slide className="findbyproduct-find-body-slide" duration={360000}> 
-                    {searchedProductsHtml}
-</Slide>*/}
             </div>
         </section>
         <section className="findbyproduct-popular">

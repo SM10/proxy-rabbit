@@ -10,6 +10,7 @@
     background-color: $color-black;
     color:$color-white;
     width: 100%;
+    min-width: 32%;
 
     @include tablet{
         width: 30%;

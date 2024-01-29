@@ -4,9 +4,11 @@ import send from '../../assets/icons/send_FILL0_wght400_GRAD0_opsz24.svg'
 import back from '../../assets/icons/arrow_back_FILL0_wght400_GRAD0_opsz24.svg'
 import axios from 'axios';
 import {io} from 'socket.io-client'
-import {useRef} from 'react'
+import {useEffect, useState, useRef} from 'react'
 
 function Chatbox({user, recipient, messageList, setMessageList}){
+    const [inputText, setInputText] = useState('')
+    const inputTextArea = useRef();
     const socket = io(process.env.REACT_APP_BASE_URL, {user: user});
 
     socket.connect();
@@ -42,17 +44,40 @@ function Chatbox({user, recipient, messageList, setMessageList}){
         };
         (async ()=>{
             try{
-                const response = await axios.post(`${process.env.REACT_APP_BASE_URL}/api/message`,sendObject)
+                const response = await axios.post(`${process.env.REACT_APP_BASE_URL}/api/message`,sendObject, {withCredentials: true})
                 
             }catch(error){
                 console.log(error)
             }
         })();
-        e.target.reset();
+        setInputText('')
     }
-
     if(!recipient){
         return(<></>)
+    }
+
+    const onTextInputPressed = (e)=>{
+        if(e.key === "Enter"){
+            const sendObject = {
+                room_id: recipient.room_id,
+                recipient_id: recipient.id,
+                message: inputText
+            };
+            (async ()=>{
+                try{
+                    const response = await axios.post(`${process.env.REACT_APP_BASE_URL}/api/message`,sendObject, {withCredentials: true})
+                    
+                }catch(error){
+                    console.log(error)
+                }
+            })();
+            setInputText('')
+            e.preventDefault();
+        }
+    }
+
+    const onChange = (e)=>{
+        setInputText(e.target.value);
     }
 
     return(<section className='chatbox'>
@@ -70,8 +95,6 @@ function Chatbox({user, recipient, messageList, setMessageList}){
         </div>
         <div className='chatbox-messages'>
             {messageList.map((message, index) => {
-                console.log(message.from_id)
-                console.log(user.user_id);
                 if(message.from_id === user.user_id){
                     return user_window(message.message, message.timestamp, index)
                 }else{
@@ -81,7 +104,7 @@ function Chatbox({user, recipient, messageList, setMessageList}){
         </div>
         <form className='chatbox-form' onSubmit={sendMessage}>
             <div className='chatbox-form-container' >
-                <textarea placeholder='Send a Message' name="message" className='chatbox-form-container__input'/>
+                <textarea placeholder='Send a Message' name="message" className='chatbox-form-container__input' value={inputText} onChange={onChange} onKeyDown={onTextInputPressed} ref={inputTextArea}/>
                 <button type='submit' className='chatbox-form-container__button'><img src={send} alt="Send button icon"/></button>
             </div>
         </form>

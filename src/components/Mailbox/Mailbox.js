@@ -5,8 +5,7 @@ import {useState, useRef, useEffect} from 'react';
 import axios from "axios";
 
 function Mailbox({userProfile}){
-    const chatListRef = useRef()
-    const chatBoxRef = useRef()
+    const mailboxRef = useRef()
     const [isOnChatList, setIsOnChatList] = useState(true)
     const [chatList, setChatList] = useState([])
     const [selectedRecipient, setSelectedRecipient] = useState(null);
@@ -37,6 +36,26 @@ function Mailbox({userProfile}){
 
     const onRecipientClicked = (recipient) =>{
         setSelectedRecipient(recipient)
+
+        console.log(mailboxRef.current.offsetWidth)
+        console.log(window.innerWidth)
+        if(window.innerWidth < 768){
+            mailboxRef.current.scrollTo({
+                behavior: "smooth",
+                top: 0,
+                left: mailboxRef.current.scrollLeft + window.innerWidth
+            })
+        }
+    }
+
+    const onChatBackPressed = (e) =>{
+        if(window.innerWidth < 768){
+            mailboxRef.current.scrollTo({
+                behavior: "smooth",
+                top: 0,
+                left: mailboxRef.current.scrollLeft - window.innerWidth
+            })
+        }
     }
 
     if(!userProfile){
@@ -49,12 +68,13 @@ function Mailbox({userProfile}){
         </main>)
     }
 
-    return (<main className="mail main">
-        <div className="mail-chatlist-container" ref={chatListRef}>
+    return (
+    <main className="mail main" ref={mailboxRef} >
+        <div className="mail-chatlist-container">
             <ChatList chatList={chatList} onUserClicked={onRecipientClicked}/>
         </div>
-        <div className="mail-chatbox-container" ref={chatBoxRef}>
-            <ChatBox recipient={selectedRecipient} user={userProfile} messageList={messageList} setMessageList={setMessageList}/>
+        <div className="mail-chatbox-container">
+            <ChatBox recipient={selectedRecipient} user={userProfile} messageList={messageList} onBackPressed={onChatBackPressed} setMessageList={setMessageList}/>
         </div>
     </main>)
 }

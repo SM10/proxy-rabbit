@@ -6,7 +6,7 @@ import axios from 'axios';
 import {io} from 'socket.io-client'
 import {useEffect, useState, useRef} from 'react'
 
-function Chatbox({user, recipient, messageList, setMessageList}){
+function Chatbox({user, recipient, messageList, setMessageList, onBackPressed}){
     const [inputText, setInputText] = useState('')
     const inputTextArea = useRef();
     const socket = io(process.env.REACT_APP_BASE_URL, {user: user});
@@ -80,12 +80,13 @@ function Chatbox({user, recipient, messageList, setMessageList}){
         setInputText(e.target.value);
     }
 
+    
+
     return(<section className='chatbox'>
         <div className='chatbox-recipient'>
             <div className='chatbox-recipient-container'>
-                <div className='chatbox-recipient-container-left'>
+                <div className='chatbox-recipient-container-left' onClick={onBackPressed}>
                     <img src={back} alt="Back button" className='chatbox-recipient-container-left__button__back'/>
-                    
                 </div>
                 <div className='chatbox-recipient-container-right'>
                     <h3 className='chatbox-recipient-container-right__name'>{recipient.first_name} {recipient.last_name}</h3>

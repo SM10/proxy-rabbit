@@ -3,7 +3,7 @@ import UserCard from '../UserCard/UserCard';
 import closeIcon from '../../assets/icons/close_FILL0_wght400_GRAD0_opsz24.svg'
 import {useState} from 'react'
 
-function UserPopup({users, onCloseClicked}){
+function UserPopup({users, onCloseClicked, onUserCardClicked}){
 
     const [searchInput, setSearchInput] = useState('')
 
@@ -26,7 +26,7 @@ function UserPopup({users, onCloseClicked}){
             </div>
             <div className="user-popup-cards">
                 {users.map(user => {
-                    return(<UserCard user={user} key={user.id}/>)
+                    return(<UserCard user={user} key={user.id} onUserCardClicked={onUserCardClicked}/>)
                 })}
             </div>
         </section>

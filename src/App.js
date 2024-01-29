@@ -1,12 +1,11 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import './App.scss';
-import ContactUserPopup from './components/ContactUserPopup/ContactUserPopup';
 import FindByLocation from './components/FindByLocation/FindByLocation';
 import FindByProduct from './components/FindByProduct/FindByProduct';
 import Footer from './components/Footer/Footer';
 import Header from './components/Header/Header';
 import Login from './components/Login/Login';
-import Logout from './components/Logout/Logout';
+import MessageUserPopup from './components/MessageUserPopup/MessageUserPopup';
 import Mailbox from './components/Mailbox/Mailbox';
 import Register from './components/Register/Register'
 import PageNotFound from './components/PageNotFound/PageNotFound'
@@ -17,11 +16,12 @@ import axios from 'axios';
 
 function App() {
   const [showUserPopup, setShowUserPopup] = useState(false);
-  const [showContactUserPopup, setShowContactUserPopup] = useState(false);
+  const [showMessageUserPopup, setShowMessageUserPopup] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [userProfile, setUserProfile] = useState(null);
   const [countries, setCountries] = useState([]);
   const [users, setUsers] = useState([])
+  const [recipient, setRecipient] = useState({id: null, first_name: '', last_name: ''})
   axios.defaults.withCredentials = true;
 
   useEffect(()=>{
@@ -55,11 +55,17 @@ function App() {
     }
   }
 
+  const contactUser = (recipient) => {
+    setRecipient(recipient);
+    setShowMessageUserPopup(true);
+    setShowUserPopup(false);
+  }
+
   return (
     <BrowserRouter>
       <Header isLoggedIn={isLoggedIn} userProfile={userProfile} setLoggedIn={setIsLoggedIn} setUserProfile={setUserProfile}/>
-      {showUserPopup ? <UserPopup users={users} onCloseClicked={() => {setShowUserPopup(false);}}/> : ''}
-      {showContactUserPopup ? <ContactUserPopup /> : ''}
+      {showUserPopup ? <UserPopup users={users} onUserCardClicked={contactUser} onCloseClicked={() => {setShowUserPopup(false);}}/> : ''}
+      {showMessageUserPopup ? <MessageUserPopup isLoggedIn={isLoggedIn} recipient={recipient} onCloseClicked={() => {setShowMessageUserPopup(false)}}/> : ''}
       <Routes >
         <Route path='/' element={<FindByLocation supportedCountries={countries} onCountryClicked={onCountryClicked}/>} />
         <Route path='/FindByLocation' element={<FindByLocation supportedCountries={countries} onCountryClicked={onCountryClicked}/>} />

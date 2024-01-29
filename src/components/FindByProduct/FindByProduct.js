@@ -1,7 +1,6 @@
 import "./FindByProduct.scss"
 import { useState, useEffect } from "react"
 import ProductSlide from "../ProductSlide/ProductSlide"
-import mascot from "../../assets/images/proxy-rabbit-mascot.png"
 import axios from "axios";
 
 function FindByProduct({onProductCardClicked}){

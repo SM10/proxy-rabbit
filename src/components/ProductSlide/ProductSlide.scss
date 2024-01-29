@@ -1,3 +1,5 @@
+@use '../../styles/partials/global' as *;
+
 .slide {
     display: flex;
     width: 100%;
@@ -21,9 +23,18 @@
       &-scroll {
         display: flex;
         overflow: hidden;
-        gap: 2%;
-        padding-left: 1%;
-        padding-right: 1%;
+        
+        @include tablet{
+          gap: 2%;
+          padding-left: 1%;
+          padding-right: 1%;
+        }
+
+        @include desktop{
+          gap: 2%;
+          padding-left: 1%;
+          padding-right: 1%;
+        }
       }
     }
   }

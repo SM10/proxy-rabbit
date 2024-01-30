@@ -2,6 +2,7 @@ import "./Login.scss"
 import {useState, useEffect} from 'react';
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import jsCookie from "js-cookie";
 
 function Login({setIsLoggedIn, setUserProfile}){
 
@@ -28,9 +29,23 @@ function Login({setIsLoggedIn, setUserProfile}){
                 const response = await axios.post(`${process.env.REACT_APP_BASE_URL}/api/login`, {
                     email: email,
                     password: password
-                }, {withCredentials: true})
-                console.log(response);
-                setUserProfile(response.data);
+                })
+                setUserProfile({user_id: response.data.user_id,
+                    email: response.data.email,
+                    first_name: response.data.first_name,
+                    last_name: response.data.last_name,
+                    country_id: response.data.country_id,
+                    country_name: response.data.country_name
+                });
+                jsCookie.set("token", response.data.token, {expires: 1})
+                localStorage.setItem("token", response.data.token);
+                localStorage.setItem("userProfile", JSON.stringify({user_id: response.data.user_id,
+                    email: response.data.email,
+                    first_name: response.data.first_name,
+                    last_name: response.data.last_name,
+                    country_id: response.data.country_id,
+                    country_name: response.data.country_name
+                }))
                 setIsLoggedIn(true);
                 navigate('/');
             }catch(error){

@@ -3,6 +3,7 @@ import logo from '../../assets/images/proxy-rabbit-logo.png'
 import mailIcon from '../../assets/icons/mail_FILL0_wght400_GRAD0_opsz24.svg'
 import { Link, useNavigate } from "react-router-dom"
 import axios from "axios"
+import jsCookie from 'js-cookie';
 
 function Header({isLoggedIn, userProfile, setLoggedIn, setUserProfile}){
     let contentObjects;
@@ -10,7 +11,9 @@ function Header({isLoggedIn, userProfile, setLoggedIn, setUserProfile}){
 
     const logout = ()=>{
         try{
-            const response = axios.post(`${process.env.REACT_APP_BASE_URL}/api/logout`);
+            localStorage.removeItem("userProfile")
+            localStorage.removeItem("token")
+            jsCookie.remove("token");
             setUserProfile(null);
             setLoggedIn(false);
             navigate('/');

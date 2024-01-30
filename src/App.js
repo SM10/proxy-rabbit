@@ -74,7 +74,7 @@ function App() {
         <Route path='/FindByProduct' element={<FindByProduct onProductCardClicked={getUsersByCountryId}/>} />
         <Route path='/Login' element={<Login setIsLoggedIn={setIsLoggedIn} setUserProfile={setUserProfile}/>} />
         <Route path='/Register' element={<Register />} />
-        <Route path='/Mailbox' element={<Mailbox userProfile={userProfile}/>} />
+        <Route path='/Mailbox' element={<Mailbox userProfile={userProfile} isLoggedIn={isLoggedIn}/>} />
         <Route path='*' element={<PageNotFound />} />
       </Routes>
       <Footer/>

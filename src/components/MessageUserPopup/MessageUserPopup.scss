@@ -25,7 +25,7 @@
         background-color: $color-light-gray;
         @include page-boundaries;
         padding-top: 1rem;
-        position: relative;
+        position: fixed;
 
         @include tablet{
             width: 40rem;

@@ -26,11 +26,11 @@ function Header({isLoggedIn, userProfile, setLoggedIn, setUserProfile}){
         contentObjects = (<div className="header-content">
             <Link to='/Mailbox'><img src={mailIcon} alt="Mail button" className="header-content__mail"/></Link>
             <h4 className="header-content__greeting">Hello, {userProfile.first_name}</h4>
-            <h4 className="header-content__text--clickable" onClick={() => {logout()}}>Logout</h4>
+            <h4 className="header-content__text--clickable" onClick={() => {logout()}}>Log out</h4>
         </div>)
     }else{
         contentObjects = (<div className="header-content">
-            <Link to='/LogIn'><h4 className="header-content__text--clickable">Sign in</h4> </Link>
+            <Link to='/LogIn'><h4 className="header-content__text--clickable">Log in</h4> </Link>
             <Link to='/Register'><h4 className="header-content__text--clickable">Register</h4></Link>
         </div>)
     }

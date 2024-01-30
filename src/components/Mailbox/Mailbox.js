@@ -5,7 +5,7 @@ import {useState, useRef, useEffect} from 'react';
 import axios from "axios";
 import jsCookie from "js-cookie";
 
-function Mailbox({userProfile}){
+function Mailbox({isLoggedIn, userProfile}){
     const mailboxRef = useRef()
     const [isOnChatList, setIsOnChatList] = useState(true)
     const [chatList, setChatList] = useState([])
@@ -63,7 +63,7 @@ function Mailbox({userProfile}){
         }
     }
 
-    if(!userProfile){
+    if(!userProfile || !isLoggedIn){
         return (<main className="mail-unlogged main">
             <section className="mail-unlogged-outer">
                 <div className="mail-unlogged-outer-container">

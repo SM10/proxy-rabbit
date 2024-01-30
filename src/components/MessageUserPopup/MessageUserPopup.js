@@ -2,6 +2,7 @@ import './MessageUserPopup.scss';
 import closeIcon from "../../assets/icons/close_FILL0_wght400_GRAD0_opsz24.svg"
 import axios from 'axios';
 import {useState} from "react";
+import jsCookie from "js-cookie"
 
 function MessageUserPopup({isLoggedIn, onCloseClicked, recipient}){
     const [sendInput, setSendInput] = useState('')
@@ -16,7 +17,7 @@ function MessageUserPopup({isLoggedIn, onCloseClicked, recipient}){
             console.log(sendObject);
             (async ()=>{
                 try{
-                    const response = await axios.post(`${process.env.REACT_APP_BASE_URL}/api/message`,sendObject, {withCredentials: true})
+                    const response = await axios.post(`${process.env.REACT_APP_BASE_URL}/api/message`,sendObject, {headers: {Authorization: `Bearer ${jsCookie.get("token")}`}})
                     setIsMessageSent(true);
                 }catch(error){
                     console.log(error)
@@ -34,7 +35,7 @@ function MessageUserPopup({isLoggedIn, onCloseClicked, recipient}){
             console.log(sendObject);
             (async ()=>{
                 try{
-                    const response = await axios.post(`${process.env.REACT_APP_BASE_URL}/api/message`,sendObject, {withCredentials: true})
+                    const response = await axios.post(`${process.env.REACT_APP_BASE_URL}/api/message`,sendObject, {headers: {Authorization: `Bearer ${jsCookie.get("token")}`}})
                     setIsMessageSent(true);
                 }catch(error){
                     console.log(error)

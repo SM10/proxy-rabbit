@@ -5,6 +5,7 @@ import back from '../../assets/icons/arrow_back_FILL0_wght400_GRAD0_opsz24.svg'
 import axios from 'axios';
 import {io} from 'socket.io-client'
 import {useEffect, useState, useRef} from 'react'
+import jsCookie from 'js-cookie'
 
 function Chatbox({user, recipient, messageList, setMessageList, onBackPressed}){
     const [inputText, setInputText] = useState('')
@@ -44,7 +45,9 @@ function Chatbox({user, recipient, messageList, setMessageList, onBackPressed}){
         };
         (async ()=>{
             try{
-                const response = await axios.post(`${process.env.REACT_APP_BASE_URL}/api/message`,sendObject, {withCredentials: true})
+                const response = await axios.post(`${process.env.REACT_APP_BASE_URL}/api/message`,sendObject, {
+                    headers: {Authorization: `Bearer ${jsCookie.get("token")}`}
+                })
                 
             }catch(error){
                 console.log(error)
@@ -65,7 +68,9 @@ function Chatbox({user, recipient, messageList, setMessageList, onBackPressed}){
             };
             (async ()=>{
                 try{
-                    const response = await axios.post(`${process.env.REACT_APP_BASE_URL}/api/message`,sendObject, {withCredentials: true})
+                    const response = await axios.post(`${process.env.REACT_APP_BASE_URL}/api/message`,sendObject, {
+                        headers: {Authorization: `Bearer ${jsCookie.get("token")}`}
+                    })
                     
                 }catch(error){
                     console.log(error)

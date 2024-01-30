@@ -3,6 +3,7 @@ import ChatList from '../ChatList/ChatList';
 import ChatBox from '../ChatBox/Chatbox';
 import {useState, useRef, useEffect} from 'react';
 import axios from "axios";
+import jsCookie from "js-cookie";
 
 function Mailbox({userProfile}){
     const mailboxRef = useRef()
@@ -14,7 +15,9 @@ function Mailbox({userProfile}){
     useEffect(()=>{
         (async ()=>{
             try{
-            const response = await axios.get(`${process.env.REACT_APP_BASE_URL}/api/message`, {withCredentials: true})
+            const response = await axios.get(`${process.env.REACT_APP_BASE_URL}/api/message`, {headers : {
+                Authorization: `Bearer ${jsCookie.get("token")}`
+            }})
             setChatList(response.data);
             }catch(error){
                 console.log(error);
@@ -25,7 +28,9 @@ function Mailbox({userProfile}){
     useEffect(()=>{
         if(selectedRecipient){
             (async ()=>{try{
-                const response = await axios.get(`${process.env.REACT_APP_BASE_URL}/api/message/${selectedRecipient.room_id}`, {withCredentials: true})
+                const response = await axios.get(`${process.env.REACT_APP_BASE_URL}/api/message/${selectedRecipient.room_id}`, {headers:{
+                    Authorization: `Bearer ${jsCookie.get("token")}`
+                }})
                 setMessageList(response.data);
             }catch(error){
                 console.log(error)

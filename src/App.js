@@ -12,7 +12,7 @@ import PageNotFound from './components/PageNotFound/PageNotFound'
 import UserPopup from './components/UserPopup/UserPopup'
 import { useState, useEffect } from 'react';
 import axios from 'axios';
-
+import jsCookie from "js-cookie"
 
 function App() {
   const [showUserPopup, setShowUserPopup] = useState(false);
@@ -27,6 +27,8 @@ function App() {
   useEffect(()=>{
     (async ()=>{
       try{
+        if(localStorage.getItem("userProfile")) setUserProfile(JSON.parse(localStorage.getItem("userProfile")))
+        if(localStorage.getItem("token")) jsCookie.set("token", localStorage.getItem("token"))
         const response = await axios.get(`${process.env.REACT_APP_BASE_URL}/api/countries`)
         setCountries(response.data);
       }catch(error){

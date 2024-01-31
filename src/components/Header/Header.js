@@ -1,5 +1,5 @@
 import "./Header.scss"
-import logo from '../../assets/images/proxy-rabbit-logo.png'
+import logo from '../../assets/images/proxy-rabbit-logo-with-mascot.png'
 import mailIcon from '../../assets/icons/mail_FILL0_wght400_GRAD0_opsz24.svg'
 import { Link, useNavigate } from "react-router-dom"
 import axios from "axios"

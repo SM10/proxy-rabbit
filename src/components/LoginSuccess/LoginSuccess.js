@@ -5,9 +5,8 @@ import { useLocation, useNavigate} from 'react-router-dom';
 function LoginSuccess({setIsLoggedIn, setUserProfile}){
     const navigate = useNavigate();
     let {search} = useLocation();
-    try{
-    
     const query = new URLSearchParams(search);
+    if(query.get("user_id") && query.get('email') && query.get('first_name') && query.get('last_name') && query.get('country_id') && query.get('country_name')){
     console.log(query.entries());
     setUserProfile({user_id: query.get("user_id"),
         email: query.get('email'),
@@ -26,8 +25,8 @@ function LoginSuccess({setIsLoggedIn, setUserProfile}){
         country_name: query.get('country_name')
     }))
     setIsLoggedIn(true);
-    navigate('/');
-}catch(error){
+    navigate(`/${query.get('to_register') ? 'ChangeCountry' : ''}`);
+}else{
 
     return (<main className="mail-unlogged main">
         <section className="mail-unlogged-outer">

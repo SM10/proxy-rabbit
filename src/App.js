@@ -11,6 +11,7 @@ import Register from './components/Register/Register'
 import PageNotFound from './components/PageNotFound/PageNotFound'
 import UserPopup from './components/UserPopup/UserPopup'
 import ChangeCountry from './components/ChangeCountry/ChangeCountry';
+import Error from './components/Error/Error';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import jsCookie from "js-cookie"
@@ -78,6 +79,7 @@ function App() {
         <Route path='/Register' element={<Register />} />
         <Route path='/Mailbox' element={<Mailbox userProfile={userProfile} isLoggedIn={isLoggedIn}/>} />
         <Route path='/ChangeCountry' element={<ChangeCountry isLoggedIn={isLoggedIn} userProfile={userProfile} setUserProfile={setUserProfile} countries={countries} setCountries={setCountries}/>} />
+        <Route path='/Error' element={<Error />} />
         <Route path='*' element={<PageNotFound />} />
       </Routes>
       <Footer/>

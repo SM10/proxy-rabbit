@@ -21,14 +21,13 @@ function ChangeCountry({isLoggedIn, countries, setCountries, userProfile, setUse
     }, [])
 
     if(!isLoggedIn || !userProfile){
-        return (<div className="change-country">
-        <div className="change-country-container">
-            <h1 className="change-country-container__header">Change your Country</h1>
-            <div className="change-country-container-loading">
-                <h3 className="change-country-container-loading__text">You must be logged in to see this page.</h3>
-            </div>
-        </div>
-        </div>)
+        return (<main className="mail-unlogged main">
+            <section className="mail-unlogged-outer">
+                <div className="mail-unlogged-outer-container">
+                    <h2 className="mail-unlogged-outer-container__text">You must be logged in to change your location.</h2>
+                </div>
+            </section>
+        </main>)
     }
 
     function onSubmit(e){

@@ -3,6 +3,7 @@ import {useState, useEffect} from 'react';
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import jsCookie from "js-cookie";
+import googleIcon from "../../assets/icons/Google__G__logo.svg"
 
 function Login({setIsLoggedIn, setUserProfile}){
 
@@ -56,6 +57,20 @@ function Login({setIsLoggedIn, setUserProfile}){
         e.target.reset();
     }
 
+    const googleAuth = (e) => {
+        (async ()=>{
+            try{
+                const response = await axios.get(`${process.env.REACT_APP_BASE_URL}/api/login/google`)
+                console.log(response);
+                window.location.href = response.data
+                
+            }catch(error){
+                console.log(error);
+            }
+        })();
+
+    }
+
     return (<main className="back main">
         <div className="login">
         <div className="login-container">
@@ -73,6 +88,9 @@ function Login({setIsLoggedIn, setUserProfile}){
                 </label>
                 <button className="login-container-form__submit"><div className="login-container-form__submit--inner">Log In</div></button>
             </form>
+            <div className="login-container-auth">
+                <button className="login-container-auth__google" onClick={googleAuth}><div className="login-container-auth__google--inner"><img src={googleIcon} alt="Google Icon" className="login-container-auth__google--inner_icon"/>Log In with Google</div></button>
+            </div>
         </div>
         </div>
     </main>)

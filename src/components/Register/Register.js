@@ -2,6 +2,7 @@ import "./Register.scss"
 import {useState, useEffect} from 'react';
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import googleIcon from "../../assets/icons/Google__G__logo.svg"
 
 function Register(){
     const navigate = useNavigate();
@@ -70,6 +71,19 @@ function Register(){
         e.target.reset();
     }
 
+    const googleAuth = (e) => {
+        (async ()=>{
+            try{
+                const response = await axios.get(`${process.env.REACT_APP_BASE_URL}/api/login/google`)
+                console.log(response);
+                window.location.href = response.data
+                
+            }catch(error){
+                console.log(error);
+            }
+        })();
+    }
+
     return (<main className="back main">
         <div className="register">
         <div className="register-container">
@@ -91,7 +105,7 @@ function Register(){
                     <p className={`register-container-form-last-name__error${isLastNameValid ? '' : '--active'}`}>Please fill in a last name</p>
                 </label>
                 <label htmlFor="register-country" className="register-container-form-country">
-                    <p className="register-container-form-country__label">Last Name</p>
+                    <p className="register-container-form-country__label">Country</p>
                     <select name="country" id="register-country" className="register-container-form-country__input">
                         {countries.map(country => {
                             return(<option value={country.name} key={country.id}>{country.name}</option>)
@@ -105,8 +119,11 @@ function Register(){
                     <p className={`register-container-form-password__error${isPasswordValid ? '' : '--active'}`}>Please fill in a password consisting of 6 or more alphanumeric characters</p>
                     <div className="register-container-form-password__holder"></div>
                 </label>
-                <button className="register-container-form__submit"><div className="register-container-form__submit--inner">Log In</div></button>
+                <button className="register-container-form__submit"><div className="register-container-form__submit--inner">Register</div></button>
             </form>
+            <div className="register-container-auth">
+                <button className="register-container-auth__google" onClick={googleAuth}><div className="login-container-auth__google--inner"><img src={googleIcon} alt="Google Icon" className="login-container-auth__google--inner_icon"/>Register with Google</div></button>
+            </div>
         </div>
         </div>
     </main>)

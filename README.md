@@ -47,6 +47,8 @@ Passport.js
 
 A RESTFUL API will be used for this. The API can be found here: https://github.com/SM10/proxy-rabbit-api
 
+The registration site may also use https://ipapi.co/json/ to get the user's country data.
+
 ### Sitemap
 
 The following pages will be necessary:

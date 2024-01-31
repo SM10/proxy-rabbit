@@ -41,9 +41,6 @@ function Mailbox({isLoggedIn, userProfile}){
 
     const onRecipientClicked = (recipient) =>{
         setSelectedRecipient(recipient)
-
-        console.log(mailboxRef.current.offsetWidth)
-        console.log(window.innerWidth)
         if(window.innerWidth < 768){
             mailboxRef.current.scrollTo({
                 behavior: "smooth",

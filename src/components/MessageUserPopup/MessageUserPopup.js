@@ -12,7 +12,7 @@ function MessageUserPopup({isLoggedIn, onCloseClicked, recipient}){
         e.preventDefault()
             const sendObject = {
                 recipient_id: recipient.id,
-                message: e.target.send.value
+                message: sendInput
             };
             console.log(sendObject);
             (async ()=>{
@@ -30,7 +30,7 @@ function MessageUserPopup({isLoggedIn, onCloseClicked, recipient}){
             e.preventDefault()
             const sendObject = {
                 recipient_id: recipient.id,
-                message: e.target.send.value
+                message: sendInput
             };
             console.log(sendObject);
             (async ()=>{

@@ -31,16 +31,34 @@
         display:flex;
         flex-grow: 1;
         justify-content: flex-end;
-        gap: 1rem;
-        @include body-text;
-
+        align-items: center;
+        gap: 3%;
+        
         @include tablet{
             gap: 5%;
         }
 
+        &__mail{
+            padding-top: 0.4rem;
+        }
+
+        &__greeting{
+            @include body-text;
+        }
+
         &__text--clickable{
+            @include body-text;
+            padding: 0.25rem 0.75rem 0.25rem;
+            border-radius: 1rem;
+            background-color: inherit;
+            border:none;
             &:hover{
-                text-decoration: underline;
+                background-color: $color-dark-gray;
+            }
+
+            @include tablet{
+                padding-left: 1rem;
+                padding-right: 1rem;
             }
         }
     }

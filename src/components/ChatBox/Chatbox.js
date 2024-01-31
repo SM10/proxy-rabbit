@@ -25,14 +25,14 @@ function Chatbox({user, recipient, messageList, setMessageList, onBackPressed}){
     const user_window = (message, timestamp, key) => {
         return(<div className='user-message' key={key}>
             <p className='user-message__message'>{message}</p>
-            <p className='user-message__timestamp'>{timestamp}</p>
+            <p className='user-message__timestamp'>{(new Date(timestamp)).toLocaleDateString()}</p>
         </div>)
     }
 
     const recipient_window = (message, timestamp, key) => {
         return(<div className='recipient-message' key={key}>
             <p className='recipient-message__message'>{message}</p>
-            <p className='recipient-message__timestamp'>{timestamp}</p>
+            <p className='recipient-message__timestamp'>{(new Date(timestamp)).toLocaleDateString()}</p>
         </div>)
     }
 

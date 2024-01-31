@@ -1,5 +1,5 @@
 import "./Header.scss"
-import logo from '../../assets/images/proxy-rabbit-logo.png'
+import logo from '../../assets/images/proxy-rabbit-logo-with-mascot.png'
 import mailIcon from '../../assets/icons/mail_FILL0_wght400_GRAD0_opsz24.svg'
 import { Link, useNavigate } from "react-router-dom"
 import axios from "axios"
@@ -30,7 +30,7 @@ function Header({isLoggedIn, userProfile, setLoggedIn, setUserProfile}){
         </div>)
     }else{
         contentObjects = (<div className="header-content">
-            <Link to='/LogIn'><h4 className="header-content__text--clickable">Log in</h4> </Link>
+            <Link to='/LogIn'><h4 className="header-content__text--clickable">Log in</h4></Link>
             <Link to='/Register'><h4 className="header-content__text--clickable">Register</h4></Link>
         </div>)
     }

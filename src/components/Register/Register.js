@@ -91,7 +91,7 @@ function Register(){
                     <p className={`register-container-form-last-name__error${isLastNameValid ? '' : '--active'}`}>Please fill in a last name</p>
                 </label>
                 <label htmlFor="register-country" className="register-container-form-country">
-                    <p className="register-container-form-country__label">Last Name</p>
+                    <p className="register-container-form-country__label">Country</p>
                     <select name="country" id="register-country" className="register-container-form-country__input">
                         {countries.map(country => {
                             return(<option value={country.name} key={country.id}>{country.name}</option>)

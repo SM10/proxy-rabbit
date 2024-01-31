@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 
 function ChangeCountry({isLoggedIn, countries, setCountries, userProfile, setUserProfile}){
     const navigate = useNavigate();
-    const [countrySelected, setCountrySelected] = useState(userProfile || countries[0] || '')
+    const [countrySelected, setCountrySelected] = useState(userProfile ? userProfile.country_name : (countries.length !== 0 ? countries[0].name : ''))
 
     useEffect(() => {
         (async () =>{
@@ -23,7 +23,7 @@ function ChangeCountry({isLoggedIn, countries, setCountries, userProfile, setUse
     if(!isLoggedIn || !userProfile){
         return (<div className="change-country">
         <div className="change-country-container">
-            <h1 className="change-country-container__header">Choose a Country</h1>
+            <h1 className="change-country-container__header">Change your Country</h1>
             <div className="change-country-container-loading">
                 <h3 className="change-country-container-loading__text">You must be logged in to see this page.</h3>
             </div>
@@ -41,7 +41,7 @@ function ChangeCountry({isLoggedIn, countries, setCountries, userProfile, setUse
 
             try{
                 await axios.patch(`${process.env.REACT_APP_BASE_URL}/api/countries/change-country`,{
-                    id: userProfile.user_id,
+                    user_id: userProfile.user_id,
                     country_id: country.id
                 })
                 setUserProfile({
@@ -61,7 +61,7 @@ function ChangeCountry({isLoggedIn, countries, setCountries, userProfile, setUse
     return (<main className="back main">
         <div className="change-country">
         <div className="change-country-container">
-            <h1 className="change-country-container__header">Choose a Country</h1>
+            <h1 className="change-country-container__header">Change your Country</h1>
             <form className="change-country-container-form" onSubmit={onSubmit}>
                 <label htmlFor="change-country-country" className="change-country-container-form-country">
                     <p className="change-country-container-form-country__label">Country</p>

@@ -14,6 +14,7 @@ import ChangeCountry from './components/ChangeCountry/ChangeCountry';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import jsCookie from "js-cookie"
+import LoginSuccess from './components/LoginSuccess/LoginSuccess';
 
 function App() {
   const [showUserPopup, setShowUserPopup] = useState(false);
@@ -23,7 +24,6 @@ function App() {
   const [countries, setCountries] = useState([]);
   const [users, setUsers] = useState([])
   const [recipient, setRecipient] = useState({id: null, first_name: '', last_name: ''})
-  axios.defaults.withCredentials = true;
 
   useEffect(()=>{
     (async ()=>{
@@ -74,6 +74,7 @@ function App() {
         <Route path='/FindByLocation' element={<FindByLocation supportedCountries={countries} onCountryClicked={onCountryClicked}/>} />
         <Route path='/FindByProduct' element={<FindByProduct onProductCardClicked={getUsersByCountryId}/>} />
         <Route path='/Login' element={<Login setIsLoggedIn={setIsLoggedIn} setUserProfile={setUserProfile}/>} />
+        <Route path='/LoginSuccess' element={<LoginSuccess setIsLoggedIn={setIsLoggedIn} setUserProfile={setUserProfile} />} />
         <Route path='/Register' element={<Register />} />
         <Route path='/Mailbox' element={<Mailbox userProfile={userProfile} isLoggedIn={isLoggedIn}/>} />
         <Route path='/ChangeCountry' element={<ChangeCountry isLoggedIn={isLoggedIn} userProfile={userProfile} setUserProfile={setUserProfile} countries={countries} setCountries={setCountries}/>} />

@@ -46,6 +46,7 @@
                 align-items: flex-start;
                 @include body-text;
                 width: 70%;
+                gap: 1rem;
 
                 &-email, &-password, &-first-name, &-last-name, &-password, &-country{
                     display: flex;

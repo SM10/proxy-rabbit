@@ -57,13 +57,16 @@ function Login({setIsLoggedIn, setUserProfile}){
         e.target.reset();
     }
 
-    function googleAuth(e){
+    const googleAuth = (e) => {
         (async ()=>{
-            //const countryArrayResponse = await axios.get(`${process.env.REACT_APP_BASE_URL}/api/countries`)
-            //const countryArray = countryArrayResponse.data
-            const response = await axios.get(`${process.env.REACT_APP_IPAPI}`)
-            //const country = countryArray.find(country => country.name === response.data.country_name);
-            console.log(response.data)
+            try{
+                const response = await axios.get(`${process.env.REACT_APP_BASE_URL}/api/login/google`)
+                console.log(response);
+                window.location.href = response.data
+                
+            }catch(error){
+                console.log(error);
+            }
         })();
 
     }

@@ -12,17 +12,16 @@ function Chatbox({user, recipient, messageList, setMessageList, onBackPressed}){
     const inputTextArea = useRef();
     const socket = io(process.env.REACT_APP_BASE_URL, {user: user});
 
+    
     useEffect(() => {
+        console.log(messageList)
         socket.connect();
         socket.on("connect", function(){
             socket.emit("data", user)
         })
-
-        socket.on("message", (postedMessage)=>{
-            const newMessageList = Object.assign([], messageList)
-            newMessageList.unshift(postedMessage)
-            console.log(newMessageList)
-            setMessageList(newMessageList)
+        socket.on("message", (postedMessages)=>{
+            console.log(postedMessages)
+            setMessageList(postedMessages)
         })
 
         return() => {

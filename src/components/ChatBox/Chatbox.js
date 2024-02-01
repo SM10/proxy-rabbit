@@ -19,7 +19,9 @@ function Chatbox({user, recipient, messageList, setMessageList, onBackPressed}){
         })
 
         socket.on("message", (postedMessage)=>{
-            const newMessageList = [postedMessage, ...messageList]
+            const newMessageList = Object.assign([], messageList)
+            newMessageList.unshift(postedMessage)
+            console.log(newMessageList)
             setMessageList(newMessageList)
         })
 

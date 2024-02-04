@@ -50,7 +50,7 @@ function Login({setIsLoggedIn, setUserProfile}){
                 setIsLoggedIn(true);
                 navigate('/');
             }catch(error){
-                console.log(error);
+                navigate(`/Error?message=${error.message}`)
             }
         })()
 
@@ -61,11 +61,9 @@ function Login({setIsLoggedIn, setUserProfile}){
         (async ()=>{
             try{
                 const response = await axios.get(`${process.env.REACT_APP_BASE_URL}/api/login/google`)
-                console.log(response);
                 window.location.href = response.data
-                
             }catch(error){
-                console.log(error);
+                navigate(`/Error?message=An error has occured while connecting to Google`)
             }
         })();
 

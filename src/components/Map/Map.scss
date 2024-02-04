@@ -18,3 +18,30 @@
         }
     }
 }
+
+@keyframes expand{
+    from {top: 40%; height: 0%; }
+    to {height: 20%; }
+}
+
+.map-section{
+    position: relative;
+    &-error{
+        display: none;
+
+        &--active{
+            position: absolute;
+            background-color: #000000aa;
+            left: 0;
+            right: 0;
+            top: 30%;
+            height: 20%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 10;
+            color: white;
+            animation: expand 0.25s;
+        }
+    }
+}

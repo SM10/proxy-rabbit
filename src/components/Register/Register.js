@@ -1,6 +1,6 @@
 import "./Register.scss"
 import {useState, useEffect} from 'react';
-import axios from "axios";
+import axios, { Axios } from "axios";
 import { useNavigate } from "react-router-dom";
 import googleIcon from "../../assets/icons/Google__G__logo.svg"
 
@@ -11,6 +11,8 @@ function Register(){
     const [isLastNameValid, setIsLastNameValid] = useState(true);
     const [isPasswordValid, setIsPasswordValid] = useState(true);
     const [countries, setCountries] = useState([]);
+    const [errorMessage, setErrorMessage] = useState('')
+    const [showError, setShowError] = useState(false)
     
     function onEmailChanged(){if(!isEmailValid) setIsEmailValid(true)}
     function onFirstNameChanged(){if(!isFirstNameValid) setIsFirstNameValid(true)}
@@ -28,6 +30,12 @@ function Register(){
     })()
     }, [])
 
+    useEffect(()=>{
+        if(errorMessage !== ''){
+            setShowError(true);
+        }
+    }, [errorMessage])
+
     if(!countries || countries.length === 0){
         <div className="register">
         <div className="register-container">
@@ -41,7 +49,7 @@ function Register(){
 
     function onSubmit(e){
         e.preventDefault()
-
+        setShowError(false);
         const email = e.target.email.value;
 
         if(!email.match(/.+[@]{1}.+[.]{1}[a-zA-Z]+/g)){setIsEmailValid(false);}
@@ -55,16 +63,17 @@ function Register(){
             const countryId = countries.find(country => country.name === e.target.country.value).id
 
             try{
-                await axios.post(`${process.env.REACT_APP_BASE_URL}/api/register`,{
+                let response = await axios.post(`${process.env.REACT_APP_BASE_URL}/api/register`,{
                     email: e.target.email.value,
                     password: e.target.password.value,
                     first_name: e.target.firstName.value,
                     last_name: e.target.lastName.value,
                     country_id: countryId
                 })
+                console.log(response)
                 navigate('/')
             }catch(error){
-                console.log(error)
+                setErrorMessage(error.response.data);
             }
         })()
 
@@ -79,7 +88,7 @@ function Register(){
                 window.location.href = response.data
                 
             }catch(error){
-                console.log(error);
+                navigate(`/Error?message=${error.message}`)
             }
         })();
     }
@@ -119,6 +128,7 @@ function Register(){
                     <p className={`register-container-form-password__error${isPasswordValid ? '' : '--active'}`}>Please fill in a password consisting of 6 or more alphanumeric characters</p>
                     <div className="register-container-form-password__holder"></div>
                 </label>
+                {showError ? <p className="register-container-form__error" >{errorMessage}</p> : ''}
                 <button className="register-container-form__submit"><div className="register-container-form__submit--inner">Register</div></button>
             </form>
             <div className="register-container-auth">
